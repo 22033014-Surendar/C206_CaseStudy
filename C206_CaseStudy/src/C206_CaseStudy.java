@@ -244,7 +244,7 @@ public class C206_CaseStudy {
 		}
 		
 		// ====== add grade ==================================================
-		public static boolean addGrade(ArrayList<Grade> gradeList) {
+		public static void addGrade(ArrayList<Grade> gradeList) {
 			String courseID = Helper.readString("Enter course id: ");
 			String studentID = Helper.readString("Enter student id: ");
 			String grade = Helper.readString("Enter student grade: ");
@@ -306,4 +306,4 @@ public class C206_CaseStudy {
 			return gradeFound;
 
 		}
-}
+	}
