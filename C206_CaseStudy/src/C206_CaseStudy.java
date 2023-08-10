@@ -21,6 +21,12 @@ public class C206_CaseStudy {
 		gradeList.add(new Grade( "22028513", "C123", "A"));
 		gradeList.add(new Grade("22021234", "C346", "A"));
 		gradeList.add(new Grade("22024321", "C123", "F"));
+		
+		//initialise Attendance arraylist with Attendance objects
+		ArrayList<Attendance> attendanceList = new ArrayList<Attendance>();
+		attendanceList.add(new Attendance("Haowen", "22021111", "Present"));
+		attendanceList.add(new Attendance("John", "22023344", "Absent"));
+		attendanceList.add(new Attendance("Tom", "22029988", "Late"));
 
 		// display menu and ask for option
 		int option = 99;
@@ -215,33 +221,6 @@ public class C206_CaseStudy {
 		return courseFound;
 
 	}
-	// ====== delete course ===============================================
-
-		public static boolean deleteCourse(ArrayList<Course> courseList) {
-			boolean courseFound = false;
-			String teacher = Helper.readString("Enter teacher name: ");
-			System.out.println();
-
-			for (Course c : courseList) {
-				if (teacher.equalsIgnoreCase(c.getTeacher())) {
-					c.display();
-					courseFound = true;
-
-					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-					if (confirm.equalsIgnoreCase("y")) {
-						courseList.remove(c);
-						System.out.println("\n*** Course successfully deleted! ***");
-						break;
-					} else if (confirm.equalsIgnoreCase("n")) {
-						System.out.println("\n*** Deletion cancelled ***");
-					} else {
-						System.out.println("\nInvalid input");
-					}
-				}
-			}
-			return courseFound;
-
-		}
 		
 		// ====== add grade ==================================================
 		public static void addGrade(ArrayList<Grade> gradeList) {
@@ -306,4 +285,77 @@ public class C206_CaseStudy {
 			return gradeFound;
 
 		}
+		
+		// =================================== Attendance ==================================
+		public static void manageAttendance(ArrayList<Attendance> attendanceList) {
+			int option = 0;
+			while (option != 4) {
+				System.out.println("1. Add Attendance");
+				System.out.println("2. View Attendance");
+				System.out.println("3. Delete Attendance");
+				option = Helper.readInt("\nEnter option or 0 for Attendance menu > ");
+				if (option == 1) {
+					addAttendance(attendanceList);
+				} else if (option == 2) {
+					viewAttendance(attendanceList);
+				} else if (option == 3) {
+					deleteAttendance(attendanceList);
+				} else if (option == 4) {
+					break;
+				} else {
+					System.out.println("\n*** Invalid option ***\n");
+				}
+			}
+		}
+		
+		// Add Attendance
+		public static void addAttendance(ArrayList<Attendance> attendanceList) {
+			String name = Helper.readString("Enter student's name > ");
+			String id = Helper.readString("Enter student's id > ");
+			String attendance = Helper.readString("Enter student's attendance > ");
+			attendanceList.add(new Attendance(name, id, attendance));
+			attendanceList.get(attendanceList.size()-1).display();
+			System.out.println("**New attendance is added for the student!**");
+		}
+		
+		//View Attendance
+		public static void viewAttendance(ArrayList<Attendance> attendanceList) {
+			Helper.line(40, "=");
+			System.out.println(String.format("%-8s | %-8s | %-2s", "Name", "Student ID", "Attendance"));
+			Helper.line(40, "=");
+			for (Attendance a : attendanceList) {
+				System.out.println(String.format("%-8s | %-8s | %-2s", a.getName(), a.getId(), a.getAttendance()));
+
+		}
+			System.out.println();
+		}
+		
+		//Delete Attendance
+		public static boolean deleteAttendance(ArrayList<Attendance> attendanceList) {
+			boolean attendanceFound = false;
+			String id = Helper.readString("Enter student id: ");
+			System.out.println();
+
+			for (Attendance a: attendanceList) {
+				if (id.equalsIgnoreCase(a.getId())) {
+					a.display();
+					attendanceFound = true;
+
+					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						attendanceList.remove(a);
+						System.out.println("\n*** Attendance successfully deleted! ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Deletion cancelled ***");
+					} else {
+						System.out.println("\nInvalid input");
+					} 
+				}
+			}
+			return false;
+			
+		}
+		
+		
 	}
