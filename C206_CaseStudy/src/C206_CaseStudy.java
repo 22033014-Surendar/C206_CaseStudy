@@ -15,6 +15,12 @@ public class C206_CaseStudy {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		courseList.add(new Course("ms lim", "C123", "English"));
 		courseList.add(new Course("mr goh", "C456", "Maths"));
+		
+		// initialise Grade arraylist with Grade objects
+		ArrayList<Grade> gradeList = new ArrayList<Grade>();
+		gradeList.add(new Grade( "22028513", "C123", "A"));
+		gradeList.add(new Grade("22021234", "C346", "A"));
+		gradeList.add(new Grade("22024321", "C123", "F"));
 
 		// display menu and ask for option
 		int option = 99;
@@ -209,4 +215,95 @@ public class C206_CaseStudy {
 		return courseFound;
 
 	}
+	// ====== delete course ===============================================
+
+		public static boolean deleteCourse(ArrayList<Course> courseList) {
+			boolean courseFound = false;
+			String teacher = Helper.readString("Enter teacher name: ");
+			System.out.println();
+
+			for (Course c : courseList) {
+				if (teacher.equalsIgnoreCase(c.getTeacher())) {
+					c.display();
+					courseFound = true;
+
+					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						courseList.remove(c);
+						System.out.println("\n*** Course successfully deleted! ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Deletion cancelled ***");
+					} else {
+						System.out.println("\nInvalid input");
+					}
+				}
+			}
+			return courseFound;
+
+		}
+		
+		// ====== add grade ==================================================
+		public static boolean addGrade(ArrayList<Grade> gradeList) {
+			String courseID = Helper.readString("Enter course id: ");
+			String studentID = Helper.readString("Enter student id: ");
+			String grade = Helper.readString("Enter student grade: ");
+			gradeList.add(new Grade(courseID, studentID, grade));
+			gradeList.get(gradeList.size() - 1).display();
+			System.out.println("***new grade has been added***\n");
+		}
+		
+		// ====== edit grade =================================================
+		public static boolean editGrade(ArrayList<Grade> gradeList) {
+			boolean gradeFound = false;
+			String courseID = Helper.readString("Enter course id: ");
+			String studentID = Helper.readString("Enter student id: ");
+			for (Grade g : gradeList) {
+				if (studentID.equalsIgnoreCase(g.getStudentID()) && courseID.equalsIgnoreCase(g.getCourseID())) {
+					g.display();
+					gradeFound = true;
+					
+					String grade = Helper.readString("\nEnter new grade > ");
+					String confirm = Helper.readString("Confirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						g.setGrade(grade);
+						System.out.println("\n*** Grade successfully edited! ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Editing process cancelled ***");
+					} else {
+						System.out.println("\nInvalid input");
+					
+					}
+				}
+			}
+		return gradeFound;
+}
+		
+		// ====== delete grade ===============================================
+		public static boolean deleteGrade(ArrayList<Grade> gradeList) {
+			boolean gradeFound = false;
+			String studentID = Helper.readString("Enter student ID: ");
+			System.out.println();
+
+			for (Grade g : gradeList) {
+				if (studentID.equalsIgnoreCase(g.getStudentID())) {
+					g.display();
+					gradeFound = true;
+
+					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						gradeList.remove(g);
+						System.out.println("\n*** Grade successfully deleted! ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Deletion cancelled ***");
+					} else {
+						System.out.println("\nInvalid input");
+					}
+				}
+			}
+			return gradeFound;
+
+		}
 }
