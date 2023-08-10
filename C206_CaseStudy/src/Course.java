@@ -2,10 +2,12 @@
 public class Course {
 	
 	private String name;
+	private String id;
 	private String teacher;
 	
-	public Course(String teacher, String name) {
+	public Course(String teacher, String id, String name) {
 		this.teacher = teacher;
+		this.id = id;
 		this.name = name;
 	}
 	
@@ -14,6 +16,13 @@ public class Course {
 	}
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -24,6 +33,7 @@ public class Course {
 	
 	public void display() {
 		System.out.println("\nTeacher Name: " + teacher);
+		System.out.println("Course ID: " + id);
 		System.out.println("Student Name: " + name);
 	}
 	

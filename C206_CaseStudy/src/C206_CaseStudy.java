@@ -13,8 +13,8 @@ public class C206_CaseStudy {
 
 		// initialise Course arraylist with Course objects
 		ArrayList<Course> courseList = new ArrayList<Course>();
-		courseList.add(new Course("ms lim", "English"));
-		courseList.add(new Course("mr goh", "Maths"));
+		courseList.add(new Course("ms lim", "C123", "English"));
+		courseList.add(new Course("mr goh", "C456", "Maths"));
 
 		// display menu and ask for option
 		int option = 99;
@@ -163,19 +163,20 @@ public class C206_CaseStudy {
 	// ====== add course ===============================================
 	public static void addCourse(ArrayList<Course> courseList) {
 		String teacher = Helper.readString("Enter teacher's name: ");
+		String id = Helper.readString("Enter course id: ");
 		String name = Helper.readString("Enter course name: ");
-		courseList.add(new Course(teacher, name));
+		courseList.add(new Course(teacher, id, name));
 		courseList.get(courseList.size() - 1).display();
 		System.out.println("***Course successfully added!***\n");
 	}
 
 	// ====== view course ===============================================
 	public static void viewCourse(ArrayList<Course> courseList) {
-		Helper.line(20, "=");
-		System.out.println(String.format("%-8s | %-2s", "Teacher", "Course"));
-		Helper.line(20, "=");
+		Helper.line(40, "=");
+		System.out.println(String.format("%-8s | %-8s | %-2s", "Teacher", "Course ID", "Course"));
+		Helper.line(40, "=");
 		for (Course c : courseList) {
-			System.out.println(String.format("%-8s | %-2s", c.getTeacher(), c.getName()));
+			System.out.println(String.format("%-8s | %-8s | %-2s", c.getTeacher(), c.getId(), c.getName()));
 
 		}
 		System.out.println();
@@ -185,11 +186,11 @@ public class C206_CaseStudy {
 
 	public static boolean deleteCourse(ArrayList<Course> courseList) {
 		boolean courseFound = false;
-		String teacher = Helper.readString("Enter teacher name: ");
+		String id = Helper.readString("Enter course id: ");
 		System.out.println();
 
 		for (Course c : courseList) {
-			if (teacher.equalsIgnoreCase(c.getTeacher())) {
+			if (id.equalsIgnoreCase(c.getId())) {
 				c.display();
 				courseFound = true;
 
