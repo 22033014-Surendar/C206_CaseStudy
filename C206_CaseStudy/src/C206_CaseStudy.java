@@ -508,7 +508,7 @@ public class C206_CaseStudy {
 
 			for (int i = 0; i < attendanceList.size(); i++ ) {
 				
-				output += String.format("%-8s | %-2s\n", attendanceList.get(i).getId(),attendanceList.get(i).getName());
+				output += String.format("%-8s | %-8s | %-2s\n", attendanceList.get(i).getName(),attendanceList.get(i).getId(), attendanceList.get(i).getAttendance());
 				
 			}
 			return output;
