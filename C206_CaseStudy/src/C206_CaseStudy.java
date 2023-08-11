@@ -4,6 +4,11 @@ public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		//initialise User arraylist with User Object
+		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(new User("Admin1", "Republ!c01"));
+		userList.add(new User("TeacherAlan", "Republ!c01"));
 
 		// initialise Student arraylist with Student objects
 		ArrayList<Student> studentList = new ArrayList<Student>();
@@ -62,6 +67,7 @@ public class C206_CaseStudy {
 				// add,view, delete enrolment
 			} else if (option == 6) {
 				// add,view, delete attendance
+				manageAttendance(attendanceList);
 			} else if (option == 7) {
 				// quit
 				System.out.println("\n Sayonara!");
@@ -88,6 +94,85 @@ public class C206_CaseStudy {
 
 	}
 
+	// ====== manage User ===============================================
+		public static void manageUser(ArrayList<User> userList) {
+			int option = 0;
+			while (option != 4) {
+				System.out.println("1. Add Student");
+				System.out.println("2. View Student");
+				System.out.println("3. Delete Student");
+				option = Helper.readInt("\nEnter option or 0 for student menu > ");
+				if (option == 1) {
+					addUser(userList);
+				} else if (option == 2) {
+					viewUser(userList);
+				} else if (option == 3) {
+					deleteUser (userList);
+				} else if (option == 4) {
+					break;
+				} else {
+					// invalid input
+					System.out.println("\n*** Invalid option ***\n");
+				}
+			}
+		}
+
+		
+		// ====== add User
+		// ===========================================================
+
+		private static void addUser(ArrayList<User> userList) {
+			// TODO Auto-generated method stub
+			String username = Helper.readString("Enter username: ");
+			String password = Helper.readString("Enter password: ");
+			userList.add(new User(username, password));
+			userList.get(userList.size() - 1).display();
+			System.out.println("***new user has been added***\n");
+		}
+			
+		// ====== view User
+			// ===========================================================
+		private static void viewUser(ArrayList<User> userList) {
+			// TODO Auto-generated method stub
+			Helper.line(20, "=");
+			System.out.println(String.format("%-8s | %-2s", "Username", "Name"));
+			Helper.line(20, "=");
+			for (User s : userList) {
+				System.out.println(String.format("%-8s | %-2s", s.getusername(), s.getpassword()));
+
+			}
+			System.out.println();
+			
+			
+		}
+
+		private static boolean deleteUser(ArrayList<User> userList) {
+			// TODO Auto-generated method stub
+			boolean userFound = false;
+			String username = Helper.readString("Enter username: ");
+			System.out.println();
+
+			for (User u : userList) {
+				if (username.equalsIgnoreCase(u.getusername())) {
+					u.display();
+					userFound = true;
+
+					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						userList.remove(u);
+						System.out.println("\n*** User has been deleted ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Deletion was cancel ***");
+					} else {
+						System.out.println("\nInvalid input");
+					}
+				}
+			}
+			return userFound;
+		}
+	
+	
 	// ====== manage student ===============================================
 	public static void manageStudent(ArrayList<Student> studentList) {
 		int option = 0;
@@ -369,7 +454,7 @@ public class C206_CaseStudy {
 	    }
 		
 		// =================================== Attendance ==================================
-		public static void manageAttendance(ArrayList<Attendance> attendanceList) {
+	    public static void manageAttendance(ArrayList<Attendance> attendanceList) {
 			int option = 0;
 			while (option != 4) {
 				System.out.println("1. Add Attendance");
@@ -377,8 +462,10 @@ public class C206_CaseStudy {
 				System.out.println("3. Delete Attendance");
 				option = Helper.readInt("\nEnter option or 0 for Attendance menu > ");
 				if (option == 1) {
-					addAttendance(attendanceList);
-				} else if (option == 2) {
+					Attendance aa = inputAttendance();
+					C206_CaseStudy.addAttendance(attendanceList, aa);
+					System.out.println("**Attendance added**");
+				}else if (option == 2) {
 					viewAttendance(attendanceList);
 				} else if (option == 3) {
 					deleteAttendance(attendanceList);
@@ -389,27 +476,41 @@ public class C206_CaseStudy {
 				}
 			}
 		}
-		
 		// Add Attendance
-		public static void addAttendance(ArrayList<Attendance> attendanceList) {
+		public static Attendance inputAttendance() {
 			String name = Helper.readString("Enter student's name > ");
 			String id = Helper.readString("Enter student's id > ");
-			String attendance = Helper.readString("Enter student's attendance > ");
-			attendanceList.add(new Attendance(name, id, attendance));
-			attendanceList.get(attendanceList.size()-1).display();
-			System.out.println("**New attendance is added for the student!**");
+			String attendance = Helper.readString("Enter attendance of student > ");
+
+			Attendance aa= new Attendance(name, id, attendance);
+			return aa;
+			
+		}
+		
+		public static void addAttendance(ArrayList<Attendance> attendanceList, Attendance aa) {
+			Attendance item;
+			for(int i = 0; i < attendanceList.size(); i++) {
+				item = attendanceList.get(i);
+				if (item.getId().equalsIgnoreCase(aa.getId()) )
+					return;
+			}
+			if ((aa.getId().isEmpty()) || (aa.getId().isEmpty()) ) {
+				return;
+			}
+			attendanceList.add(aa);
+			
 		}
 		
 		//View Attendance
-		public static void viewAttendance(ArrayList<Attendance> attendanceList) {
+		public static String viewAttendance(ArrayList<Attendance> attendanceList) {
 			Helper.line(40, "=");
-			System.out.println(String.format("%-8s | %-8s | %-2s", "Name", "Student ID", "Attendance"));
+			String output = String.format("%-8s | %-8s | %-2s", "Name", "Student ID", "Attendance");
 			Helper.line(40, "=");
-			for (Attendance a : attendanceList) {
-				System.out.println(String.format("%-8s | %-8s | %-2s", a.getName(), a.getId(), a.getAttendance()));
+			for (int i = 0; i < attendanceList.size(); i++) {
+				System.out.println(String.format("%-8s | %-8s | %-2s", attendanceList.get(i).getName(), attendanceList.get(i).getId(), attendanceList.get(i).getAttendance()));
 
 		}
-			System.out.println();
+			return output;
 		}
 		
 		//Delete Attendance
@@ -435,7 +536,7 @@ public class C206_CaseStudy {
 					} 
 				}
 			}
-			return false;
+			return attendanceFound;
 			
 		}
 		
@@ -496,30 +597,30 @@ public class C206_CaseStudy {
 		}
 		
 		// ====== delete fee ===============================================
-			public static boolean deleteFee(ArrayList<Fee> feeList) {
-					boolean feeFound = false;
-					String studentID = Helper.readString("Enter student ID: ");
-					System.out.println();
+		public static boolean deleteFee(ArrayList<Fee> feeList) {
+				boolean feeFound = false;
+				String studentID = Helper.readString("Enter student ID: ");
+				System.out.println();
 
-					for (Fee f : feeList) {
-						if (studentID.equalsIgnoreCase(f.getStudentID())) {
-							f.display();
-							feeFound = true;
+				for (Fee f : feeList) {
+					if (studentID.equalsIgnoreCase(f.getStudentID())) {
+						f.display();
+						feeFound = true;
 
-							String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-							if (confirm.equalsIgnoreCase("y")) {
-								feeList.remove(f);
-								System.out.println("\n*** fee successfully deleted! ***");
-								break;
-							} else if (confirm.equalsIgnoreCase("n")) {
-								System.out.println("\n*** Deletion cancelled ***");
-							} else {
-								System.out.println("\nInvalid input");
-							}
+						String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+						if (confirm.equalsIgnoreCase("y")) {
+							feeList.remove(f);
+							System.out.println("\n*** fee successfully deleted! ***");
+							break;
+						} else if (confirm.equalsIgnoreCase("n")) {
+							System.out.println("\n*** Deletion cancelled ***");
+						} else {
+							System.out.println("\nInvalid input");
 						}
 					}
-					return feeFound;
-
 				}
+				return feeFound;
+
+			}
 		
 	}
