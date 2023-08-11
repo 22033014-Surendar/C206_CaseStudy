@@ -36,6 +36,6 @@ public class Fee {
 	public void display() {
 		System.out.println("\nStudent ID: " + sID);
 		System.out.println("Fee Type: " + feeType);
-		System.out.println("Fee Amount: " + fee);
+		System.out.println("Fee Amount: $ " + fee);
 	}
 }

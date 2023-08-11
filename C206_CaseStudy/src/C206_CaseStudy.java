@@ -428,6 +428,16 @@ public class C206_CaseStudy {
 		}
 		
 		// =================================== Fee ==================================
+		public static Fee inputFee() {
+			String studentID = Helper.readString("Enter student ID > ");
+			String feeType = Helper.readString("Enter fee type > ");
+			double fee = Helper.readDouble("Enter fee amount > ");
+
+			Fee ff= new Fee(studentID, feeType, fee);
+			return ff;
+		}
+			
+		
 		public static void manageFee(ArrayList<Fee> feeList) {
 			int option = 0;
 			while (option != 4) {
@@ -436,7 +446,8 @@ public class C206_CaseStudy {
 				System.out.println("3. Delete Fee");
 				option = Helper.readInt("\nEnter option or 0 for Fee menu > ");
 				if (option == 1) {
-					addFee(feeList);
+					Fee ff = inputFee();
+					addFee(feeList, ff);
 				} else if (option == 2) {
 					viewFee(feeList);
 				} else if (option == 3) {
@@ -451,11 +462,11 @@ public class C206_CaseStudy {
 		
 		
 		// ====== add fee ==================================================
-		public static void addFee(ArrayList<Fee> feeList) {
-			String studentID = Helper.readString("Enter student id: ");
-			String feeType = Helper.readString("Enter fee type: ");
-			double fee = Helper.readDouble("Enter fee amount: ");
-			feeList.add(new Fee(studentID, feeType, fee));
+		public static void addFee(ArrayList<Fee> feeList, Fee ff) {
+			//String studentID = Helper.readString("Enter student id: ");
+			//String feeType = Helper.readString("Enter fee type: ");
+			//double fee = Helper.readDouble("Enter fee amount: ");
+			feeList.add(ff);
 			feeList.get(feeList.size() - 1).display();
 			System.out.println("***new fee has been added***\n");
 				}
