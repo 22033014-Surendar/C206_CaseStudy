@@ -55,7 +55,7 @@ public class C206_CaseStudy {
 				// add,view, delete student
 				manageStudent(studentList);
 			} else if (option == 4) {
-				// edit,update, delete grade
+				// add,view, delete fee
 			} else if (option == 5) {
 				manageEnrolment(enrolmentList);
 				// add,view, delete enrolment
@@ -80,7 +80,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Manage User");
 		System.out.println("2. Manage Course");
 		System.out.println("3. Manage Student");
-		System.out.println("4. Manage Grade???");
+		System.out.println("4. Manage Fee");
 		System.out.println("5. Manage Enrolment");
 		System.out.println("6. Manage Attendance");
 		System.out.println("7. Quit");
@@ -436,7 +436,7 @@ public class C206_CaseStudy {
 			System.out.println("***new fee has been added***\n");
 				}
 				
-		// ====== view grade =================================================
+		// ====== view fee =================================================
 		public static void viewFee(ArrayList<Fee> feeList) {
 			Helper.line(40, "=");
 			System.out.println(String.format("%-8s | %-8s | %-2s", "Student ID", "Fee Type", "Fee Amount"));
@@ -448,7 +448,7 @@ public class C206_CaseStudy {
 			System.out.println();
 		}
 		
-		// ====== delete grade ===============================================
+		// ====== delete fee ===============================================
 			public static boolean deleteFee(ArrayList<Fee> feeList) {
 					boolean feeFound = false;
 					String studentID = Helper.readString("Enter student ID: ");
