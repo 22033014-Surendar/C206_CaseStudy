@@ -9,22 +9,20 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 	private Student s1;
 	private Student s2;
-<<<<<<< HEAD
 	private Course c1;
 	private Course c2;
-=======
 	private Enrolment e1;
 	private Enrolment e2;
->>>>>>> branch 'master' of https://github.com/22033014-Surendar/C206_CaseStudy.git
 	private Fee f1;
 	private Fee f2;
+	private Attendance a1;
+	private Attendance a2;
 	
 	private ArrayList<Student> studentList;
-<<<<<<< HEAD
 	private ArrayList<Course> courseList;
-=======
 	private ArrayList<Enrolment> enrolmentList;
->>>>>>> branch 'master' of https://github.com/22033014-Surendar/C206_CaseStudy.git
+	private ArrayList<Attendance> attendanceList;
+
 	private ArrayList<Fee> feeList;
 
 	@Before
@@ -32,23 +30,20 @@ public class C206_CaseStudyTest {
 		// prepare test data
 		s1 = new Student("22028513","junwei");
 		s2 = new Student("22021234","skye");
-<<<<<<< HEAD
 		c1 = new Course ("Mr bob", "A123", "info tech");
 		c2 = new Course ("Ms Yeo", "B123", "engineering");
-=======
 		e1 = new Enrolment("22005047", "C110");
 		e2 = new Enrolment("22028513", "C123");
->>>>>>> branch 'master' of https://github.com/22033014-Surendar/C206_CaseStudy.git
 		f1 = new Fee("22028513", "Exam", 70.0);
 		f2 = new Fee("22021234", "Tuition", 100.0);
+		a1= new Attendance("Haowen", "22021111", "Present");
+		a2 = new Attendance("Haowen", "22023333", "Absent");
 		
 		studentList = new ArrayList<Student>();
-<<<<<<< HEAD
 		courseList = new ArrayList<Course>();
-=======
 		enrolmentList = new ArrayList<Enrolment>();
->>>>>>> branch 'master' of https://github.com/22033014-Surendar/C206_CaseStudy.git
 		feeList = new ArrayList<Fee>();
+		attendanceList = new ArrayList<Attendance>();
 	}
 	
 	
@@ -69,23 +64,8 @@ public class C206_CaseStudyTest {
 		//......
 	}
 	
-<<<<<<< HEAD
-	@After
-	public void tearDown() throws Exception {
-		s1 = null;
-		s2 = null;
-		studentList = null;
-	}
 	
 
-	@Test
-	public void c206_test() {
-		//fail("Not yet implemented"); 
-		assertTrue("C206_CaseStudy_SampleTest ",true);
-	}
-	
-=======
->>>>>>> branch 'master' of https://github.com/22033014-Surendar/C206_CaseStudy.git
 	@Test
 	public void testAddFee() {
 		// Item list is not null, so that can add a new item - boundary
@@ -184,6 +164,45 @@ public class C206_CaseStudyTest {
 
 	        // Add test cases for deleteEnrolment method here
 	    }
+	 
+	 @Test
+		public void testAddAttendance() {
+			assertNotNull("Check if there is valid Attendance arraylist to add to", attendanceList);
+			C206_CaseStudy.addAttendance(attendanceList, a1);
+			assertEquals("Check that Attendance arraylist size is 1", 1, attendanceList.size());
+			assertSame("Check that attendance is added", a1, attendanceList.get(0));
+				
+			
+			C206_CaseStudy.addAttendance(attendanceList, a2);
+			assertEquals("Check that Attendance arraylist size is 2", 2, attendanceList.size());
+			assertSame("Check that Attendance is added", a2, attendanceList.get(1));
+
+		}
+	 @Test
+		public void testViewAttendance() {
+			assertNotNull("Test if there is valid Attenndance arrayList to view item", attendanceList);
+			
+			String allAttendance = C206_CaseStudy.viewAttendance(attendanceList);
+			String testOutput = "";
+			assertEquals("Check the ViewAttendanceList", testOutput, allAttendance);
+			
+			C206_CaseStudy.addAttendance(attendanceList, a1);
+			assertEquals("Test that the Attendance arrayList size is 1", 1 , attendanceList.size());
+			
+			allAttendance = C206_CaseStudy.viewAttendance(attendanceList);
+			testOutput = String.format("%-8s | %-8s | %-2s\n", "Name", "Student ID", "Attendance");
+			
+			assertEquals("Test the ViewAttendance", testOutput, allAttendance);
+		}
+		
+	 @Test
+		public void testDeleteAttendance() {
+			assertTrue("Test that valid attendance is deleted", C206_CaseStudy.deleteAttendance(attendanceList));
+			assertEquals("Test that attendanceList size is reduced", 1, attendanceList.size());
+			
+			assertFalse("Test that invalid attendance is not deleted", C206_CaseStudy.deleteAttendance(attendanceList));
+			assertEquals("Test that attendanceList size remains the same", 1, attendanceList.size());
+		}
 	
 	@After
 	public void tearDown() throws Exception {
