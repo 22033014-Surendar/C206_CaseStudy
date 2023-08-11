@@ -171,7 +171,7 @@ public class C206_CaseStudy {
 		return cc;
 	}
 
-	// ====== manage course ===============================================
+	// ====== manage course ==============================================
 	public static void manageCourse(ArrayList<Course> courseList) {
 		int option = 0;
 		while (option != 4) {

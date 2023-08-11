@@ -182,7 +182,7 @@ public class C206_CaseStudyTest {
 	        // Test if Enrolment list is not null but empty
 	        assertNotNull("Test if there is valid Enrolment arraylist to add an Enrolment", enrolmentList);
 
-	        // Add test cases for deleteEnrolment method here
+	        // Add test cases for deleteEnrolment method here.
 	    }
 	
 	@After
