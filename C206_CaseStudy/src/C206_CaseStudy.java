@@ -159,6 +159,17 @@ public class C206_CaseStudy {
 		}
 		return studentFound;
 	}
+	
+
+	// =================================== Course ==================================
+	public static Course inputCourse() {
+		String teacher = Helper.readString("Enter teacher's name : ");
+		String id = Helper.readString("Enter course id: ");
+		String name = Helper.readString("Enter course name: ");
+		
+		Course cc= new Course(teacher, id, name);
+		return cc;
+	}
 
 	// ====== manage course ===============================================
 	public static void manageCourse(ArrayList<Course> courseList) {
@@ -184,11 +195,11 @@ public class C206_CaseStudy {
 	}
 
 	// ====== add course ===============================================
-	public static void addCourse(ArrayList<Course> courseList) {
-		String teacher = Helper.readString("Enter teacher's name: ");
-		String id = Helper.readString("Enter course id: ");
-		String name = Helper.readString("Enter course name: ");
-		courseList.add(new Course(teacher, id, name));
+	public static void addCourse(ArrayList<Course> courseList, Course cc) {
+		//String teacher = Helper.readString("Enter teacher's name: ");
+		//String id = Helper.readString("Enter course id: ");
+		//String name = Helper.readString("Enter course name: ");
+		courseList.add(cc);
 		courseList.get(courseList.size() - 1).display();
 		System.out.println("***Course successfully added!***\n");
 	}

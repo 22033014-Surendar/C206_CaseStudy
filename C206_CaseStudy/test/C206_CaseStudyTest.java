@@ -9,10 +9,13 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 	private Student s1;
 	private Student s2;
+	private Course c1;
+	private Course c2;
 	private Fee f1;
 	private Fee f2;
 	
 	private ArrayList<Student> studentList;
+	private ArrayList<Course> courseList;
 	private ArrayList<Fee> feeList;
 	
 	public C206_CaseStudyTest() {
@@ -24,10 +27,13 @@ public class C206_CaseStudyTest {
 		// prepare test data
 		s1 = new Student("22028513","junwei");
 		s2 = new Student("22021234","skye");
+		c1 = new Course ("Mr bob", "A123", "info tech");
+		c2 = new Course ("Ms Yeo", "B123", "engineering");
 		f1 = new Fee("22028513", "Exam", 70.0);
 		f2 = new Fee("22021234", "Tuition", 100.0);
 		
 		studentList = new ArrayList<Student>();
+		courseList = new ArrayList<Course>();
 		feeList = new ArrayList<Fee>();
 	}
 	
@@ -52,6 +58,7 @@ public class C206_CaseStudyTest {
 		s2 = null;
 		studentList = null;
 	}
+	
 
 	@Test
 	public void c206_test() {
@@ -93,6 +100,39 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addFee(feeList, f2);
 		assertEquals("Test that Fee arraylist size is 2", 2, feeList.size());
 		assertSame("Test that Fee is added", f2, feeList.get(1));
+	}
+	@Test
+	public void testAddCourse() {
+		// Item list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid Course arraylist to add to", courseList);
+		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		//The item just added is as same as the first item of the list
+		C206_CaseStudy.addCourse(courseList, c1);
+		assertEquals("Check that Course arraylist size is 1", 1, courseList.size());
+		assertSame("Check that Course is added", c1, courseList.get(0));
+		
+		//Add another item. test The size of the list is 2? -normal
+		//The item just added is as same as the second item of the list
+		C206_CaseStudy.addCourse(courseList, c2);
+		assertEquals("Check that Course arraylist size is 2", 2, courseList.size());
+		assertSame("Check that Course is added", c2, courseList.get(1));
+	}
+	@Test
+	public void testDeleteCourse() {
+		// Item list is not null, so that can delete a course - boundary
+		assertNotNull("Test if there is valid Course arraylist to delete from", courseList);
+		
+		//Given a list with two courses, after deleting 1 fee, the size of the list is 1 - normal
+		//The item just added is as same as the first item of the list
+		C206_CaseStudy.deleteCourse(courseList, c1);		
+		assertEquals("Test that Course arraylist size is 2", 2, courseList.size());
+		assertSame("Test that Course is deleted", c1, courseList.get(0));
+		
+		//Add another item. test The size of the list is 2? - normal
+		//The item just added is as same as the second item of the list
+		C206_CaseStudy.addCourse(courseList, c2);
+		assertEquals("Test that Course arraylist size is 2", 2, courseList.size());
+		assertSame("Test that Course is added", c2, courseList.get(1));
 	}
 
 }
