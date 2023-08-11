@@ -103,7 +103,7 @@ public class C206_CaseStudyTest {
 	}
 	@Test
 	public void testAddCourse() {
-		// Item list is not null, so that can add a new item - boundary
+		// Item list is not null, so that can add a new item - boundary.
 		assertNotNull("Check if there is valid Course arraylist to add to", courseList);
 		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
 		//The item just added is as same as the first item of the list
