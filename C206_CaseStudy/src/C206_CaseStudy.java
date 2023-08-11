@@ -466,7 +466,7 @@ public class C206_CaseStudy {
 			System.out.println(String.format("%-8s | %-8s | %-2s", "Student ID", "Fee Type", "Fee Amount"));
 			Helper.line(40, "=");
 			for (Fee f : feeList) {
-				System.out.println(String.format("%-8s | %-8s | %-2d", f.getStudentID(), f.getFeeType(), f.getFee()));
+				System.out.println(String.format("%-10s | %-8s | %-2.2f", f.getStudentID(), f.getFeeType(), f.getFee()));
 
 		}
 			System.out.println();
