@@ -56,6 +56,7 @@ public class C206_CaseStudy {
 				manageStudent(studentList);
 			} else if (option == 4) {
 				// add,view, delete fee
+				manageFee(feeList);
 			} else if (option == 5) {
 				manageEnrolment(enrolmentList);
 				// add,view, delete enrolment
