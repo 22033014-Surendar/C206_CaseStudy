@@ -51,16 +51,16 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddStudent() {
-		// Item list is not null, so that can add a new item - boundary.
+		// student list is not null, so that can add a new student - boundary.
 		assertNotNull("Check if there is valid Student arraylist to add to", studentList);
-		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
-		//The student just added is as same as the first item of the list
+		//Given an empty list, after adding 1 student, the size of the list is 1 - normal
+		//The student just added is as same as the first student of the list
 		C206_CaseStudy.addStudent(studentList, s1);
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		assertSame("Check that Student is added", s1, studentList.get(0));
 		
-		//Add another item. test The size of the list is 2? -normal
-		//The student just added is as same as the second item of the list
+		//Add another student. test The size of the list is 2? -normal
+		//The student just added is as same as the second student of the list
 		C206_CaseStudy.addStudent(studentList, s2);
 		assertEquals("Check that Student arraylist size is 2", 2, studentList.size());
 		assertSame("Check that Student is added", s2, studentList.get(1));
