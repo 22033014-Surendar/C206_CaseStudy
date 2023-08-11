@@ -22,6 +22,12 @@ public class C206_CaseStudy {
 		gradeList.add(new Grade("22021234", "C346", "A"));
 		gradeList.add(new Grade("22024321", "C123", "F"));
 		
+		// initialise Fee arraylist with Fee objects
+		ArrayList<Fee> feeList = new ArrayList<Fee>();
+		feeList.add(new Fee("22028513", "Exam", 70.0));
+		feeList.add(new Fee("22021234", "Tuition", 100.50));
+		feeList.add(new Fee("22024321", "Exam", 60.90));
+		
 		//initialise Attendance arraylist with Attendance objects
 		ArrayList<Attendance> attendanceList = new ArrayList<Attendance>();
 		attendanceList.add(new Attendance("Haowen", "22021111", "Present"));
@@ -262,7 +268,6 @@ public class C206_CaseStudy {
 			}
 		return gradeFound;
 }
-		//1
 		// ====== delete grade ===============================================
 		public static boolean deleteGrade(ArrayList<Grade> gradeList) {
 			boolean gradeFound = false;
@@ -420,6 +425,55 @@ public class C206_CaseStudy {
 			return false;
 			
 		}
+		
+		// ====== add fee ==================================================
+		public static void addFee(ArrayList<Fee> feeList) {
+			String studentID = Helper.readString("Enter student id: ");
+			String feeType = Helper.readString("Enter fee type: ");
+			double fee = Helper.readDouble("Enter fee amount: ");
+			feeList.add(new Fee(studentID, feeType, fee));
+			feeList.get(feeList.size() - 1).display();
+			System.out.println("***new fee has been added***\n");
+				}
+				
+		// ====== view grade =================================================
+		public static void viewFee(ArrayList<Fee> feeList) {
+			Helper.line(40, "=");
+			System.out.println(String.format("%-8s | %-8s | %-2s", "Student ID", "Fee Type", "Fee Amount"));
+			Helper.line(40, "=");
+			for (Fee f : feeList) {
+				System.out.println(String.format("%-8s | %-8s | %-2s", f.getStudentID(), f.getFeeType(), f.getFee()));
+
+		}
+			System.out.println();
+		}
+		
+		// ====== delete grade ===============================================
+			public static boolean deleteFee(ArrayList<Fee> feeList) {
+					boolean feeFound = false;
+					String studentID = Helper.readString("Enter student ID: ");
+					System.out.println();
+
+					for (Fee f : feeList) {
+						if (studentID.equalsIgnoreCase(f.getStudentID())) {
+							f.display();
+							feeFound = true;
+
+							String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+							if (confirm.equalsIgnoreCase("y")) {
+								feeList.remove(f);
+								System.out.println("\n*** fee successfully deleted! ***");
+								break;
+							} else if (confirm.equalsIgnoreCase("n")) {
+								System.out.println("\n*** Deletion cancelled ***");
+							} else {
+								System.out.println("\nInvalid input");
+							}
+						}
+					}
+					return feeFound;
+
+				}
 		
 		
 	}
