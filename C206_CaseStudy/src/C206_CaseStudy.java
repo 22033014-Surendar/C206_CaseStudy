@@ -173,77 +173,87 @@ public class C206_CaseStudy {
 		}
 	
 	
-	// ====== manage student ===============================================
-	public static void manageStudent(ArrayList<Student> studentList) {
-		int option = 0;
-		while (option != 4) {
-			System.out.println("1. Add Student");
-			System.out.println("2. View Student");
-			System.out.println("3. Delete Student");
-			option = Helper.readInt("\nEnter option or 0 for student menu > ");
-			if (option == 1) {
-				addStudent(studentList);
-			} else if (option == 2) {
-				viewStudent(studentList);
-			} else if (option == 3) {
-				deleteStudent(studentList);
-			} else if (option == 4) {
-				break;
-			} else {
-				// invalid input
-				System.out.println("\n*** Invalid option ***\n");
-			}
-		}
-	}
-
-	// ====== add student
-	// ===========================================================
-	public static void addStudent(ArrayList<Student> studentList) {
-		String id = Helper.readString("Enter student id: ");
-		String name = Helper.readString("Enter student name: ");
-		studentList.add(new Student(id, name));
-		studentList.get(studentList.size() - 1).display();
-		System.out.println("***new student has been added***\n");
-	}
-
-	// ====== view student ======
-	public static void viewStudent(ArrayList<Student> studentList) {
-		Helper.line(20, "=");
-		System.out.println(String.format("%-8s | %-2s", "ID", "Name"));
-		Helper.line(20, "=");
-		for (Student s : studentList) {
-			System.out.println(String.format("%-8s | %-2s", s.getId(), s.getName()));
-
-		}
-		System.out.println();
-	}
-
-	// ====== delete student
-	// ==========================================================
-	public static boolean deleteStudent(ArrayList<Student> studentList) {
-		boolean studentFound = false;
-		String id = Helper.readString("Enter student id: ");
-		System.out.println();
-
-		for (Student s : studentList) {
-			if (id.equalsIgnoreCase(s.getId())) {
-				s.display();
-				studentFound = true;
-
-				String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-				if (confirm.equalsIgnoreCase("y")) {
-					studentList.remove(s);
-					System.out.println("\n*** Student has been deleted ***");
+		// ====== manage student ===============================================
+		public static void manageStudent(ArrayList<Student> studentList) {
+			int option = 0;
+			while (option != 4) {
+				System.out.println("1. Add Student");
+				System.out.println("2. View Student");
+				System.out.println("3. Delete Student");
+				option = Helper.readInt("\nEnter option or 0 for student menu > ");
+				if (option == 1) {
+					Student st = inputStudent();
+					addStudent(studentList,st);
+				} else if (option == 2) {
+					viewStudent(studentList);
+				} else if (option == 3) {
+					String id = Helper.readString("Enter student id: ");
+					deleteStudent(studentList, id);
+				} else if (option == 4) {
 					break;
-				} else if (confirm.equalsIgnoreCase("n")) {
-					System.out.println("\n*** Deletion was cancel ***");
 				} else {
-					System.out.println("\nInvalid input");
+					// invalid input
+					System.out.println("\n*** Invalid option ***\n");
 				}
 			}
 		}
-		return studentFound;
-	}
+
+		// ====== add student ============================================
+		public static Student inputStudent() {
+			String id = Helper.readString("Enter student id: ");
+			String name = Helper.readString("Enter student name: ");
+			Student st = new Student(id, name);
+			return st;
+		}
+		public static void addStudent(ArrayList<Student> studentList,Student st) {
+			studentList.add(st);
+			studentList.get(studentList.size() - 1).display();
+			System.out.println("***new student has been added***\n");
+		}
+		
+		// ====== view student =========================================
+		public static String retrieveStudent(ArrayList<Student> studentList) {
+			String output = "";
+
+			for (int i = 0; i < studentList.size(); i++ ) {
+				
+				output += String.format("%-8s | %-2s\n", studentList.get(i).getId(),studentList.get(i).getName());
+				
+			}
+			return output;
+		}
+		
+		public static void viewStudent(ArrayList<Student> studentList) {
+
+			String output = String.format("%-8s | %-2s\n", "ID", "Name");
+			
+			output += retrieveStudent(studentList);
+			System.out.println(output);
+		}
+
+		// ====== delete student ===============================================
+		public static boolean deleteStudent(ArrayList<Student> studentList, String id) {
+			boolean studentFound = false;
+
+			for (Student s : studentList) {
+				if (id.equalsIgnoreCase(s.getId())) {
+					s.display();
+					studentFound = true;
+
+					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						studentList.remove(s);
+						System.out.println("\n*** Student has been deleted ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Deletion was cancel ***");
+					} else {
+						System.out.println("\nInvalid input");
+					}
+				}
+			}
+			return studentFound;
+		}
 	
 
 	// =================================== Course ==================================

@@ -51,20 +51,55 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddStudent() {
-		//....
+		// Item list is not null, so that can add a new item - boundary.
+		assertNotNull("Check if there is valid Student arraylist to add to", studentList);
+		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		//The student just added is as same as the first item of the list
+		C206_CaseStudy.addStudent(studentList, s1);
+		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
+		assertSame("Check that Student is added", s1, studentList.get(0));
+		
+		//Add another item. test The size of the list is 2? -normal
+		//The student just added is as same as the second item of the list
+		C206_CaseStudy.addStudent(studentList, s2);
+		assertEquals("Check that Student arraylist size is 2", 2, studentList.size());
+		assertSame("Check that Student is added", s2, studentList.get(1));
 	}
 	
 	@Test
-	public void testViewStudent() {
-		//......
+	public void testRetreieveStudent() {
+		// Test if Item list is not null but empty - boundary
+		assertNotNull("Test if there is valid Chromebook arraylist to retrieve item from", studentList);
+		
+		//test if the list of Student retrieved from the C206_CaseStudy is empty - boundary
+		String students= C206_CaseStudy.retrieveStudent(studentList);
+		String testOutput = "";
+		assertEquals("Test that the retrieved Chromebooklist is empty?", testOutput, students);
+		
+		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+		C206_CaseStudy.addStudent(studentList, s1);
+		C206_CaseStudy.addStudent(studentList, s2);
+		assertEquals("Test that chromebook arraylist size is 2", 2, studentList.size());
+		
+		//test if the expected output string same as the list of student retrieved from the C206_CaseStudy	
+		students = C206_CaseStudy.retrieveStudent(studentList);
+		testOutput = String.format("%-8s | %-2s\n", "22028513", "junwei");
+		testOutput += String.format("%-8s | %-2s\n", "22021234", "skye");	
+		assertEquals("Test that ViewAllChromebooklist", testOutput, students);
 	}
 	
 	@Test 
-	public void testDelete() {
-		//......
+	public void testDeleteStudent() {
+		// boundary
+		assertNotNull("test if there is valid Student arrayList to delete from",studentList);
+		C206_CaseStudy.addStudent(studentList, s1);
+		// normal
+		Boolean ok = C206_CaseStudy.deleteStudent(studentList, "22028513");
+		assertTrue("Test if student id is ok to delete?",ok);
+		// error condition
+		ok = C206_CaseStudy.deleteStudent(studentList,"00001111");
+		assertFalse("Test if non-esiting student id is NOT ok to delete?",ok);
 	}
-	
-	
 
 	@Test
 	public void testAddFee() {
