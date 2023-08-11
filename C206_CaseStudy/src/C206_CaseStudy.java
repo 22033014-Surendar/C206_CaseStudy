@@ -180,7 +180,8 @@ public class C206_CaseStudy {
 			System.out.println("3. Delete Course");
 			option = Helper.readInt("\nEnter option or 0 for course menu > ");
 			if (option == 1) {
-				addCourse(courseList);
+				Course cc = inputCourse();
+				addCourse(courseList, cc);
 			} else if (option == 2) {
 				viewCourse(courseList);
 			} else if (option == 3) {
