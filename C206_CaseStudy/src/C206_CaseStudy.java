@@ -470,63 +470,61 @@ public class C206_CaseStudy {
 				System.out.println("1. Add Attendance");
 				System.out.println("2. View Attendance");
 				System.out.println("3. Delete Attendance");
-				option = Helper.readInt("\nEnter option or 0 for Attendance menu > ");
+				option = Helper.readInt("\nEnter option or 0 for attendance menu > ");
 				if (option == 1) {
-					Attendance aa = inputAttendance();
-					C206_CaseStudy.addAttendance(attendanceList, aa);
-					System.out.println("**Attendance added**");
-				}else if (option == 2) {
+					Attendance ad = inputAttendance();
+					addAttendance(attendanceList,ad);
+				} else if (option == 2) {
 					viewAttendance(attendanceList);
 				} else if (option == 3) {
-					deleteAttendance(attendanceList);
+					String id = Helper.readString("Enter attendance id: ");
+					deleteAttendance(attendanceList, id);
 				} else if (option == 4) {
 					break;
 				} else {
+					// invalid input
 					System.out.println("\n*** Invalid option ***\n");
 				}
 			}
 		}
-		// Add Attendance
-		public static Attendance inputAttendance() {
-			String name = Helper.readString("Enter student's name > ");
-			String id = Helper.readString("Enter student's id > ");
-			String attendance = Helper.readString("Enter attendance of student > ");
-
-			Attendance aa= new Attendance(name, id, attendance);
-			return aa;
-			
+	    
+	    // =================================Input/ Add attendance============================
+	    public static Attendance inputAttendance() {
+			String name = Helper.readString("Enter attendace id: ");
+			String id = Helper.readString("Enter attendance name: ");
+			String attendance = Helper.readString("Enter attendance status > ");
+			Attendance ad = new Attendance(name, id, attendance);
+			return ad;
+		}
+		public static void addAttendance(ArrayList<Attendance> attendanceList, Attendance ad) {
+			attendanceList.add(ad);
+			attendanceList.get(attendanceList.size() - 1).display();
+			System.out.println("***New attendance has been added***\n");
 		}
 		
-		public static void addAttendance(ArrayList<Attendance> attendanceList, Attendance aa) {
-			Attendance item;
-			for(int i = 0; i < attendanceList.size(); i++) {
-				item = attendanceList.get(i);
-				if (item.getId().equalsIgnoreCase(aa.getId()) )
-					return;
-			}
-			if ((aa.getId().isEmpty()) || (aa.getId().isEmpty()) ) {
-				return;
-			}
-			attendanceList.add(aa);
-			
-		}
-		
-		//View Attendance
-		public static String viewAttendance(ArrayList<Attendance> attendanceList) {
-			Helper.line(40, "=");
-			String output = String.format("%-8s | %-8s | %-2s", "Name", "Student ID", "Attendance");
-			Helper.line(40, "=");
-			for (int i = 0; i < attendanceList.size(); i++) {
-				System.out.println(String.format("%-8s | %-8s | %-2s", attendanceList.get(i).getName(), attendanceList.get(i).getId(), attendanceList.get(i).getAttendance()));
+		// ================================View Attendance=========================================
+		public static String retrieveAttendance(ArrayList<Attendance> attendanceList) {
+			String output = "";
 
-		}
+			for (int i = 0; i < attendanceList.size(); i++ ) {
+				
+				output += String.format("%-8s | %-2s\n", attendanceList.get(i).getId(),attendanceList.get(i).getName());
+				
+			}
 			return output;
 		}
 		
+		public static void viewAttendance(ArrayList<Attendance> attendanceList) {
+
+			String output = String.format("%-8s | %-8s | %-2s\n", "Name", "ID", "Attendance Status");
+			
+			output += retrieveAttendance(attendanceList);
+			System.out.println(output);
+		}
+		
 		//Delete Attendance
-		public static boolean deleteAttendance(ArrayList<Attendance> attendanceList) {
+		public static boolean deleteAttendance(ArrayList<Attendance> attendanceList, String id) {
 			boolean attendanceFound = false;
-			String id = Helper.readString("Enter student id: ");
 			System.out.println();
 
 			for (Attendance a: attendanceList) {

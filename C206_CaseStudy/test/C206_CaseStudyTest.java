@@ -37,7 +37,7 @@ public class C206_CaseStudyTest {
 		f1 = new Fee("22028513", "Exam", 70.0);
 		f2 = new Fee("22021234", "Tuition", 100.0);
 		a1= new Attendance("Haowen", "22021111", "Present");
-		a2 = new Attendance("Haowen", "22023333", "Absent");
+		a2 = new Attendance("Tom", "22023333", "Absent");
 		
 		studentList = new ArrayList<Student>();
 		courseList = new ArrayList<Course>();
@@ -214,29 +214,38 @@ public class C206_CaseStudyTest {
 
 		}
 	 @Test
-		public void testViewAttendance() {
-			assertNotNull("Test if there is valid Attenndance arrayList to view item", attendanceList);
+	 public void testRetreieveAttendance() {
+			// Test if Item list is not null but empty - boundary
+			assertNotNull("Test if there is valid Attendance arraylist to retrieve item from", attendanceList);
 			
-			String allAttendance = C206_CaseStudy.viewAttendance(attendanceList);
+			//test if the list of Attendance retrieved from the C206_CaseStudy is empty - boundary
+			String attendance= C206_CaseStudy.retrieveAttendance(attendanceList);
 			String testOutput = "";
-			assertEquals("Check the ViewAttendanceList", testOutput, allAttendance);
+			assertEquals("Test that the retrieved Attendancelist is empty?", testOutput, attendance);
 			
+			//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 			C206_CaseStudy.addAttendance(attendanceList, a1);
-			assertEquals("Test that the Attendance arrayList size is 1", 1 , attendanceList.size());
+			C206_CaseStudy.addAttendance(attendanceList, a2);
+			assertEquals("Test that attendance arraylist size is 2", 2, attendanceList.size());
 			
-			allAttendance = C206_CaseStudy.viewAttendance(attendanceList);
-			testOutput = String.format("%-8s | %-8s | %-2s\n", "Name", "Student ID", "Attendance");
-			
-			assertEquals("Test the ViewAttendance", testOutput, allAttendance);
+			//test if the expected output string same as the list of attendance retrieved from the C206_CaseStudy	
+			attendance = C206_CaseStudy.retrieveAttendance(attendanceList);
+			testOutput = String.format("%-8s | %-8s | %-2s\n", "Haowen", "22021111", "Present");
+			testOutput += String.format("%-8s | %-8s | %-2s\n", "Tom", "22023333", "Absent");	
+			assertEquals("Test that ViewAllAttendancelist", testOutput, attendance);
 		}
 		
 	 @Test
-		public void testDeleteAttendance() {
-			assertTrue("Test that valid attendance is deleted", C206_CaseStudy.deleteAttendance(attendanceList));
-			assertEquals("Test that attendanceList size is reduced", 1, attendanceList.size());
-			
-			assertFalse("Test that invalid attendance is not deleted", C206_CaseStudy.deleteAttendance(attendanceList));
-			assertEquals("Test that attendanceList size remains the same", 1, attendanceList.size());
+	 public void testDeleteAttendance() {
+			// boundary
+			assertNotNull("test if there is valid Attendance arrayList to delete from", attendanceList);
+			C206_CaseStudy.addAttendance(attendanceList, a1);
+			// normal
+			Boolean ok = C206_CaseStudy.deleteAttendance(attendanceList, "22021111" );
+			assertTrue("Test if student id is ok to delete?",ok);
+			// error condition
+			ok = C206_CaseStudy.deleteAttendance(attendanceList,"00001111");
+			assertFalse("Test if non-existing student id is NOT ok to delete?",ok);
 		}
 	
 	@After
