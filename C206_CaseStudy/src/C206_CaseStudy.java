@@ -426,6 +426,29 @@ public class C206_CaseStudy {
 			
 		}
 		
+		// =================================== Fee ==================================
+		public static void manageFee(ArrayList<Fee> feeList) {
+			int option = 0;
+			while (option != 4) {
+				System.out.println("1. Add Fee");
+				System.out.println("2. View Fee");
+				System.out.println("3. Delete Fee");
+				option = Helper.readInt("\nEnter option or 0 for Fee menu > ");
+				if (option == 1) {
+					addFee(feeList);
+				} else if (option == 2) {
+					viewFee(feeList);
+				} else if (option == 3) {
+					deleteFee(feeList);
+				} else if (option == 4) {
+					break;
+				} else {
+					System.out.println("\n*** Invalid option ***\n");
+				}
+			}
+		}
+		
+		
 		// ====== add fee ==================================================
 		public static void addFee(ArrayList<Fee> feeList) {
 			String studentID = Helper.readString("Enter student id: ");
@@ -442,7 +465,7 @@ public class C206_CaseStudy {
 			System.out.println(String.format("%-8s | %-8s | %-2s", "Student ID", "Fee Type", "Fee Amount"));
 			Helper.line(40, "=");
 			for (Fee f : feeList) {
-				System.out.println(String.format("%-8s | %-8s | %-2s", f.getStudentID(), f.getFeeType(), f.getFee()));
+				System.out.println(String.format("%-8s | %-8s | %-2d", f.getStudentID(), f.getFeeType(), f.getFee()));
 
 		}
 			System.out.println();
@@ -474,6 +497,5 @@ public class C206_CaseStudy {
 					return feeFound;
 
 				}
-		
 		
 	}
