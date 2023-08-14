@@ -572,7 +572,8 @@ public class C206_CaseStudy {
 				} else if (option == 2) {
 					viewFee(feeList);
 				} else if (option == 3) {
-					deleteFee(feeList);
+					String id = Helper.readString("Enter student ID: ");
+					deleteFee(feeList, id);
 				} else if (option == 4) {
 					break;
 				} else {
@@ -593,42 +594,49 @@ public class C206_CaseStudy {
 				}
 				
 		// ====== view fee =================================================
-		public static void viewFee(ArrayList<Fee> feeList) {
-			Helper.line(40, "=");
-			System.out.println(String.format("%-8s | %-8s | %-2s", "Student ID", "Fee Type", "Fee Amount"));
-			Helper.line(40, "=");
-			for (Fee f : feeList) {
-				System.out.println(String.format("%-10s | %-8s | $ %-2.2f", f.getStudentID(), f.getFeeType(), f.getFee()));
+		public static String retrieveFee(ArrayList<Fee> feeList) {
+			String output = "";
 
+			for (int i = 0; i < feeList.size(); i++ ) {
+				
+				output += String.format("%-10s | %-10s | %-2.2f\n", feeList.get(i).getStudentID(),feeList.get(i).getFeeType(), feeList.get(i).getFee());
+				
+			}
+			return output;
 		}
-			System.out.println();
+		
+		public static void viewFee(ArrayList<Fee> feeList) {
+
+			String output = String.format("%-8s | %-10s | %-2s\n", "Student ID", "Fee Type", "Fee Amount");
+			
+			output += retrieveFee(feeList);
+			System.out.println(output);
 		}
 		
 		// ====== delete fee ===============================================
-		public static boolean deleteFee(ArrayList<Fee> feeList) {
-				boolean feeFound = false;
-				String studentID = Helper.readString("Enter student ID: ");
-				System.out.println();
+		public static boolean deleteFee(ArrayList<Fee> feeList, String id) {
+			boolean feeFound = false;
+			System.out.println();
 
-				for (Fee f : feeList) {
-					if (studentID.equalsIgnoreCase(f.getStudentID())) {
-						f.display();
-						feeFound = true;
+			for (Fee f: feeList) {
+				if (id.equalsIgnoreCase(f.getStudentID())) {
+					f.display();
+					feeFound = true;
 
-						String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-						if (confirm.equalsIgnoreCase("y")) {
-							feeList.remove(f);
-							System.out.println("\n*** fee successfully deleted! ***");
-							break;
-						} else if (confirm.equalsIgnoreCase("n")) {
-							System.out.println("\n*** Deletion cancelled ***");
-						} else {
-							System.out.println("\nInvalid input");
-						}
-					}
+					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+					if (confirm.equalsIgnoreCase("y")) {
+						feeList.remove(f);
+						System.out.println("\n*** Fee successfully deleted! ***");
+						break;
+					} else if (confirm.equalsIgnoreCase("n")) {
+						System.out.println("\n*** Deletion cancelled ***");
+					} else {
+						System.out.println("\nInvalid input");
+					} 
 				}
-				return feeFound;
-
 			}
+			return feeFound;
+			
+		}
 		
 	}

@@ -118,23 +118,38 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Fee arraylist size is 2", 2, feeList.size());
 		assertSame("Test that Fee is added", f2, feeList.get(1));
 	}
-	
 	@Test
-	public void testDeleteFee() {
-		// Item list is not null, so that can delete a fee - boundary
-		assertNotNull("Test if there is valid Fee arraylist to delete from", feeList);
+	 public void testRetrieveFee() {
+		// Test if Item list is not null but empty - boundary
+		assertNotNull("Test if there is valid Fee arraylist to retrieve item from", feeList);
 		
-		//Given a list with two fees, after deleting 1 fee, the size of the list is 1 - normal
-		//The item just added is as same as the first item of the list
-		C206_CaseStudy.deleteFee(feeList, f1);		
-		assertEquals("Test that Fee arraylist size is 2", 2, feeList.size());
-		assertSame("Test that Fee is deleted", f1, feeList.get(0));
-		
-		//Add another item. test The size of the list is 2? - normal
-		//The item just added is as same as the second item of the list
+		//test if the list of Attendance retrieved from the C206_CaseStudy is empty - boundary
+		String fee= C206_CaseStudy.retrieveFee(feeList);
+		String testOutput = "";
+		assertEquals("Test that the retrieved feeList is empty?", testOutput, fee);
+			
+		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+		C206_CaseStudy.addFee(feeList, f1);
 		C206_CaseStudy.addFee(feeList, f2);
-		assertEquals("Test that Fee arraylist size is 2", 2, feeList.size());
-		assertSame("Test that Fee is added", f2, feeList.get(1));
+		assertEquals("Test that fee arraylist size is 2", 2, feeList.size());
+			
+		//test if the expected output string same as the list of attendance retrieved from the C206_CaseStudy	
+		fee = C206_CaseStudy.retrieveFee(feeList);
+		testOutput = String.format("%-8s | %-8s | %-2.2f\n", "22028513", "Exam", 70.0);
+		testOutput += String.format("%-8s | %-8s | %-2.2s\n", "22021234", "Tuition", 100.0);	
+		assertEquals("Test that ViewAllFeelist", testOutput, fee);
+	}
+	@Test
+	 public void testDeleteFee() {
+		// boundary
+		assertNotNull("test if there is valid Fee arrayList to delete from", feeList);
+		C206_CaseStudy.addFee(feeList, f1);
+		// normal
+		Boolean ok = C206_CaseStudy.deleteFee(feeList, "22027890" );
+		assertTrue("Test if student id is ok to delete?",ok);
+		// error condition
+		ok = C206_CaseStudy.deleteFee(feeList, "22020000");
+		assertFalse("Test if non-existing student id is NOT ok to delete?",ok);
 	}
 	@Test
 	public void testAddCourse() {
