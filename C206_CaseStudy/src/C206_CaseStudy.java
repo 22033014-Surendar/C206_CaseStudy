@@ -247,11 +247,13 @@ public class C206_CaseStudy {
 					s.display();
 					studentFound = true;
 					studentList.remove(s);
+					System.out.println("\n*** Student has been deleted ***");
+					break;
 				}
 			}
 			return studentFound;
 		}
-
+	
 
 	// =================================== Course ==================================
 	public static Course inputCourse() {
