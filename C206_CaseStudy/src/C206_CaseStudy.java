@@ -402,26 +402,28 @@ public class C206_CaseStudy {
 
 		}
 		// ====== manage enrolment ======
-	    public static void manageEnrolment(ArrayList<Enrolment> enrolmentList) {
-	        int option = 0;
-	        while (option != 4) {
-	            System.out.println("1. Add Enrolment");
-	            System.out.println("2. View Enrolment");
-	            System.out.println("3. Delete Enrolment");
-	            option = Helper.readInt("\nEnter option or 0 for enrolment menu > ");
-	            if (option == 1) {
-	                addEnrolment(enrolmentList);
-	            } else if (option == 2) {
-	                viewEnrolment(enrolmentList);
-	            } else if (option == 3) {
-	                deleteEnrolment(enrolmentList);
-	            } else if (option == 4) {
-	                break;
-	            } else {
-	                System.out.println("\n*** Invalid option ***\n");
-	            }
-	        }
-	    }
+		public static void manageEnrolment(ArrayList<Enrolment> enrolmentList) {
+			int option = 0;
+			while (option != 4) {
+				System.out.println("1. Add Enrolment");
+				System.out.println("2. View Enrolment");
+				System.out.println("3. Delete Enrolment");
+				option = Helper.readInt("\nEnter option or 0 for enrolment menu > ");
+				if (option == 1) {
+					addEnrolment(enrolmentList);
+				} else if (option == 2) {
+					viewEnrolment(enrolmentList);
+				} else if (option == 3) {
+					String studentId = Helper.readString("Enter student ID: ");
+					String courseId = Helper.readString("Enter course ID: ");
+					deleteEnrolment(enrolmentList,studentId,courseId);
+				} else if (option == 4) {
+					break;
+				} else {
+					System.out.println("\n*** Invalid option ***\n");
+				}
+			}
+		}
 
 	    // ====== add enrolment ======
 	    public static void addEnrolment(ArrayList<Enrolment> enrolmentList) {
@@ -432,7 +434,7 @@ public class C206_CaseStudy {
 	    }
 
 	    // ====== view enrolment ======
-	    public static void viewEnrolment(ArrayList<Enrolment> enrolmentList) {
+	    public static String viewEnrolment(ArrayList<Enrolment> enrolmentList) {
 	        Helper.line(30, "=");
 	        System.out.println(String.format("%-12s | %-10s", "Student ID", "Course ID"));
 	        Helper.line(30, "=");
@@ -440,26 +442,27 @@ public class C206_CaseStudy {
 	            System.out.println(String.format("%-12s | %-10s", enrolment.getStudentId(), enrolment.getCourseId()));
 	        }
 	        System.out.println();
+			return null;
 	    }
 
 	    // ====== delete enrolment ======
-	    public static void deleteEnrolment(ArrayList<Enrolment> enrolmentList) {
-	        String studentId = Helper.readString("Enter student ID: ");
-	        String courseId = Helper.readString("Enter course ID: ");
+	    public static boolean deleteEnrolment(ArrayList<Enrolment> enrolmentList, String id, String id1) {
 	        boolean enrolmentFound = false;
 	        
 	        for (Enrolment enrolment : enrolmentList) {
-	            if (enrolment.getStudentId().equalsIgnoreCase(studentId) && enrolment.getCourseId().equalsIgnoreCase(courseId)) {
+	            if (enrolment.getStudentId().equalsIgnoreCase(id) && enrolment.getCourseId().equalsIgnoreCase(id1)) {
 	                enrolmentFound = true;
 	                enrolmentList.remove(enrolment);
 	                System.out.println("\n*** Enrolment has been deleted ***");
 	                break;
 	            }
+	            return enrolmentFound;
 	        }
 	        
 	        if (!enrolmentFound) {
 	            System.out.println("\n*** Enrolment not found ***");
 	        }
+			return enrolmentFound;
 	    }
 		
 		// =================================== Attendance ==================================
