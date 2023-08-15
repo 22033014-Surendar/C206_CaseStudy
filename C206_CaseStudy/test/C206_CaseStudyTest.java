@@ -100,7 +100,7 @@ public class C206_CaseStudyTest {
 		assertTrue("Test if student id is ok to delete?",ok);
 		// error condition
 		ok = C206_CaseStudy.deleteStudent(studentList,"00001111");
-		assertFalse("Test if non-esiting student id is NOT ok to delete?",ok);
+		assertFalse("Test if non-existing student id is NOT ok to delete?",ok);
 	}
 
 	@Test

@@ -246,22 +246,12 @@ public class C206_CaseStudy {
 				if (id.equalsIgnoreCase(studentID)) {
 					s.display();
 					studentFound = true;
-
-					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-					if (confirm.equalsIgnoreCase("y")) {
-						studentList.remove(s);
-						System.out.println("\n*** Student has been deleted ***");
-						break;
-					} else if (confirm.equalsIgnoreCase("n")) {
-						System.out.println("\n*** Deletion was cancel ***");
-					} else {
-						System.out.println("\nInvalid input");
-					}
+					studentList.remove(s);
 				}
 			}
 			return studentFound;
 		}
-	
+
 
 	// =================================== Course ==================================
 	public static Course inputCourse() {
