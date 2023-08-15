@@ -70,23 +70,23 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testRetreieveStudent() {
 		// Test if Item list is not null but empty - boundary
-		assertNotNull("Test if there is valid Chromebook arraylist to retrieve item from", studentList);
+		assertNotNull("Test if there is valid Student arraylist to retrieve item from", studentList);
 		
 		//test if the list of Student retrieved from the C206_CaseStudy is empty - boundary
 		String students= C206_CaseStudy.retrieveStudent(studentList);
 		String testOutput = "";
-		assertEquals("Test that the retrieved Chromebooklist is empty?", testOutput, students);
+		assertEquals("Test that the retrieved StudentList is empty?", testOutput, students);
 		
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		C206_CaseStudy.addStudent(studentList, s1);
 		C206_CaseStudy.addStudent(studentList, s2);
-		assertEquals("Test that chromebook arraylist size is 2", 2, studentList.size());
+		assertEquals("Test that Student arraylist size is 2", 2, studentList.size());
 		
 		//test if the expected output string same as the list of student retrieved from the C206_CaseStudy	
 		students = C206_CaseStudy.retrieveStudent(studentList);
 		testOutput = String.format("%-8s | %-2s\n", "22028513", "junwei");
 		testOutput += String.format("%-8s | %-2s\n", "22021234", "skye");	
-		assertEquals("Test that ViewAllChromebooklist", testOutput, students);
+		assertEquals("Test that ViewStudentlist", testOutput, students);
 	}
 	
 	// JUN WEI
