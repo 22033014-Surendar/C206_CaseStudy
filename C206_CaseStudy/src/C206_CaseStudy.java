@@ -202,7 +202,7 @@ public class C206_CaseStudy {
 			}
 		}
 
-		// ====== add student ======================================== JUN WEI
+		// ====== add student ======================================= JUN WEI
 		public static Student inputStudent() {
 			String id = Helper.readString("Enter student id: ");
 			String name = Helper.readString("Enter student name: ");
