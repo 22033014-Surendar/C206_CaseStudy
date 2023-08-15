@@ -215,7 +215,7 @@ public class C206_CaseStudy {
 			System.out.println("***new student has been added***\n");
 		}
 		
-		// ====== view student ========================================= JUN WEI
+		// ====== view student ======================================== JUN WEI
 		public static String retrieveStudent(ArrayList<Student> studentList) {
 			String output = "";
 
