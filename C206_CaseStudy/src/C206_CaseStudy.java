@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int MANAGE_STUDENT = 3;
+	private static final int OPTION_QUIT = 4;
+	private static final int OPTION_DELETE = 3;
+	private static final int OPTION_VIEW = 2;
+	private static final int OPTION_ADD = 1;
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -10,7 +16,7 @@ public class C206_CaseStudy {
 		userList.add(new User("Admin1", "Republ!c01"));
 		userList.add(new User("TeacherAlan", "Republ!c01"));
 
-		// initialise Student arraylist with Student objects
+		// initialise Student arraylist with Student objects JUN WEI
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		studentList.add(new Student("22028513", "jun wei"));
 		studentList.add(new Student("22021234", "skye"));
@@ -54,10 +60,10 @@ public class C206_CaseStudy {
 			} else if (option == 1) {
 				// add,view, delete user
 			} else if (option == 2) {
-				// add,view, delete course
+				// add,view, delete course 
 				manageCourse(courseList);
-			} else if (option == 3) {
-				// add,view, delete student
+			} else if (option == MANAGE_STUDENT) {
+				// add,view, delete student JUN WEI
 				manageStudent(studentList);
 			} else if (option == 4) {
 				// add,view, delete fee
@@ -78,7 +84,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	// ====== main menu ======
+	// ====== main menu ====================== 
 	public static void mainMenu() {
 		System.out.println();
 		Helper.line(33, "*");
@@ -118,8 +124,7 @@ public class C206_CaseStudy {
 		}
 
 		
-		// ====== add User
-		// ===========================================================
+		// ====== add User ============================================
 
 		private static void addUser(ArrayList<User> userList) {
 			// TODO Auto-generated method stub
@@ -130,8 +135,7 @@ public class C206_CaseStudy {
 			System.out.println("***new user has been added***\n");
 		}
 			
-		// ====== view User
-			// ===========================================================
+		// ====== view User =============================================
 		private static void viewUser(ArrayList<User> userList) {
 			// TODO Auto-generated method stub
 			Helper.line(20, "=");
@@ -173,7 +177,7 @@ public class C206_CaseStudy {
 		}
 	
 	
-		// ====== manage student ===============================================
+		// ====== manage student ===================================== JUN WEI 
 		public static void manageStudent(ArrayList<Student> studentList) {
 			int option = 0;
 			while (option != 4) {
@@ -181,15 +185,15 @@ public class C206_CaseStudy {
 				System.out.println("2. View Student");
 				System.out.println("3. Delete Student");
 				option = Helper.readInt("\nEnter option or 0 for student menu > ");
-				if (option == 1) {
+				if (option == OPTION_ADD) {
 					Student st = inputStudent();
 					addStudent(studentList,st);
-				} else if (option == 2) {
+				} else if (option == OPTION_VIEW) {
 					viewStudent(studentList);
-				} else if (option == 3) {
+				} else if (option == OPTION_DELETE) {
 					String id = Helper.readString("Enter student id: ");
 					deleteStudent(studentList, id);
-				} else if (option == 4) {
+				} else if (option == OPTION_QUIT) {
 					break;
 				} else {
 					// invalid input
@@ -198,7 +202,7 @@ public class C206_CaseStudy {
 			}
 		}
 
-		// ====== add student ============================================
+		// ====== add student ======================================== JUN WEI
 		public static Student inputStudent() {
 			String id = Helper.readString("Enter student id: ");
 			String name = Helper.readString("Enter student name: ");
@@ -211,13 +215,15 @@ public class C206_CaseStudy {
 			System.out.println("***new student has been added***\n");
 		}
 		
-		// ====== view student =========================================
+		// ====== view student ========================================= JUN WEI
 		public static String retrieveStudent(ArrayList<Student> studentList) {
 			String output = "";
 
 			for (int i = 0; i < studentList.size(); i++ ) {
 				
-				output += String.format("%-8s | %-2s\n", studentList.get(i).getId(),studentList.get(i).getName());
+				String id = studentList.get(i).getId();
+				String name = studentList.get(i).getName();
+				output += String.format("%-8s | %-2s\n", id,name);
 				
 			}
 			return output;
@@ -231,12 +237,13 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 
-		// ====== delete student ===============================================
+		// ====== delete student =========================================== JUN WEI
 		public static boolean deleteStudent(ArrayList<Student> studentList, String id) {
 			boolean studentFound = false;
 
 			for (Student s : studentList) {
-				if (id.equalsIgnoreCase(s.getId())) {
+				String studentID = s.getId();
+				if (id.equalsIgnoreCase(studentID)) {
 					s.display();
 					studentFound = true;
 
