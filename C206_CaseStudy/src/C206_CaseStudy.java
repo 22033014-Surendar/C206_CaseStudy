@@ -124,7 +124,7 @@ public class C206_CaseStudy {
 		}
 
 		
-		// ====== add User ============================================
+		// ====== add User ===========================================
 
 		private static void addUser(ArrayList<User> userList) {
 			// TODO Auto-generated method stub
@@ -135,7 +135,7 @@ public class C206_CaseStudy {
 			System.out.println("***new user has been added***\n");
 		}
 			
-		// ====== view User =============================================
+		// ====== view User ============================================
 		private static void viewUser(ArrayList<User> userList) {
 			// TODO Auto-generated method stub
 			Helper.line(20, "=");

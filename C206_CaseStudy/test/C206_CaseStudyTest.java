@@ -48,7 +48,7 @@ public class C206_CaseStudyTest {
 	
 	
 
-
+	// JUN WEI
 	@Test
 	public void testAddStudent() {
 		// student list is not null, so that can add a new student - boundary.
@@ -66,6 +66,7 @@ public class C206_CaseStudyTest {
 		assertSame("Check that Student is added", s2, studentList.get(1));
 	}
 	
+	// JUN WEI
 	@Test
 	public void testRetreieveStudent() {
 		// Test if Item list is not null but empty - boundary
@@ -88,6 +89,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllChromebooklist", testOutput, students);
 	}
 	
+	// JUN WEI
 	@Test 
 	public void testDeleteStudent() {
 		// boundary
