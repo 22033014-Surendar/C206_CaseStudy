@@ -1,4 +1,4 @@
-public class Fee {
+public class Fee { //22027998 Richard
 	private String sID;
 	private String feeType;
 	private double fee;
