@@ -49,7 +49,10 @@ public class C206_CaseStudy {
 
 		//Enrolment arrayList
 		ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
-				
+		enrolmentList.add(new Enrolment("22005037", "C330"));
+		enrolmentList.add(new Enrolment("22005027", "C440"));
+		enrolmentList.add(new Enrolment("22005017", "C550"));
+		
 		// display menu and ask for option 
 		int option = 99;
 		mainMenu();
