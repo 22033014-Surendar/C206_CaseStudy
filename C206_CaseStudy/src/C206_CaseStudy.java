@@ -654,15 +654,15 @@ public class C206_CaseStudy {
 				System.out.println("2. View Fee");
 				System.out.println("3. Delete Fee");
 				option = Helper.readInt("\nEnter option or 0 for Fee menu > ");
-				if (option == 1) {
+				if (option == OPTION_ADD) {
 					Fee ff = inputFee();
 					addFee(feeList, ff);
-				} else if (option == 2) {
+				} else if (option == OPTION_VIEW) {
 					viewFee(feeList);
-				} else if (option == 3) {
+				} else if (option == OPTION_DELETE) {
 					String id = Helper.readString("Enter student ID: ");
 					deleteFee(feeList, id);
-				} else if (option == 4) {
+				} else if (option == OPTION_QUIT) {
 					break;
 				} else {
 					System.out.println("\n*** Invalid option ***\n");

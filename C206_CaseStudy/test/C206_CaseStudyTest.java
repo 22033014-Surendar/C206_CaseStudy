@@ -196,7 +196,7 @@ public class C206_CaseStudyTest {
 		// Test if Item list is not null but empty - boundary
 		assertNotNull("Test if there is valid Fee arraylist to retrieve item from", feeList);
 
-		// test if the list of Attendance retrieved from the C206_CaseStudy is empty -
+		// test if the list of Fee retrieved from the C206_CaseStudy is empty -
 		// boundary
 		String fee = C206_CaseStudy.retrieveFee(feeList);
 		String testOutput = "";
@@ -208,7 +208,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addFee(feeList, f2);
 		assertEquals("Test that fee arraylist size is 2", 2, feeList.size());
 
-		// test if the expected output string same as the list of attendance retrieved
+		// test if the expected output string same as the list of fee retrieved
 		// from the C206_CaseStudy
 		fee = C206_CaseStudy.retrieveFee(feeList);
 		testOutput = String.format("%-10s | %-10s | %-2.2f\n", "22028513", "Exam", 70.0);
