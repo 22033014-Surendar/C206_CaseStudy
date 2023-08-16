@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int MANAGE_USER = 1;
 	private static final int MANAGE_STUDENT = 3;
 	private static final int OPTION_QUIT = 4;
 	private static final int OPTION_DELETE = 3;
@@ -13,8 +14,8 @@ public class C206_CaseStudy {
 		
 		//initialise User arraylist with User Object
 		ArrayList<User> userList = new ArrayList<User>();
-		userList.add(new User("Admin1", "Republ!c01"));
-		userList.add(new User("TeacherAlan", "Republ!c01"));
+		userList.add(new User("Bob", "Republ!c02", "Admin"));
+		userList.add(new User("Alan", "Republ!c01", "Teacher"));
 
 		// initialise Student arraylist with Student objects JUN WEI
 		ArrayList<Student> studentList = new ArrayList<Student>();
@@ -57,7 +58,8 @@ public class C206_CaseStudy {
 			if (option == 0) {
 				// display main menu
 				mainMenu();
-			} else if (option == 1) {
+			} else if (option == MANAGE_USER) {
+				manageUser(userList);
 				// add,view, delete user
 			} else if (option == 2) {
 				// add,view, delete course 
@@ -101,82 +103,107 @@ public class C206_CaseStudy {
 	}
 
 	// ====== manage User ===============================================
-		public static void manageUser(ArrayList<User> userList) {
-			int option = 0;
-			while (option != 4) {
-				System.out.println("1. Add Student");
-				System.out.println("2. View Student");
-				System.out.println("3. Delete Student");
-				option = Helper.readInt("\nEnter option or 0 for student menu > ");
-				if (option == 1) {
-					addUser(userList);
-				} else if (option == 2) {
-					viewUser(userList);
-				} else if (option == 3) {
-					deleteUser (userList);
-				} else if (option == 4) {
+	public static void manageUser(ArrayList<User> userList) {
+		int option = 0;
+		while (option != 4) {
+			System.out.println("1. Add user");
+			System.out.println("2. View users");
+			System.out.println("3. Delete user");
+			option = Helper.readInt("\nEnter option or 0 for student menu > ");
+			if (option == OPTION_ADD) {
+				User us = inputUser();
+				addUser(userList,us);
+			} else if (option == OPTION_VIEW) {
+				viewUser(userList);
+			} else if (option == OPTION_DELETE) {
+				String us = Helper.readString("Enter username: ");
+				deleteUser (userList,us);
+			} else if (option == OPTION_QUIT) {
+				break;
+			} else {
+				// invalid input
+				System.out.println("\n*** Invalid option ***\n");
+			}
+		}
+	}
+
+
+	// ====== add User
+	// ===========================================================
+
+	public static User inputUser() {
+		String username = Helper.readString("Enter username: ");
+		String password = Helper.readString("Enter password: ");
+		String role = Helper.readString("Enter role: ");
+		User us = new User(username, password,role);
+		return us;
+	}
+
+	public static void addUser(ArrayList<User> userList,User us) {
+		userList.add(us);
+		userList.get(userList.size() - 1).display();
+		System.out.println("***new user has been added***\n");
+	}
+
+	// ====== view User
+	// ===========================================================
+	private static void viewUser(ArrayList<User> userList) {
+		// TODO Auto-generated method stub
+		Helper.line(20, "=");
+		System.out.println(String.format("%-8s | %-2s", "Username", "Role"));
+		Helper.line(20, "=");
+		for (User s : userList) {
+			String getusername = s.getusername();
+			String getrole = s.getrole();
+			System.out.println(String.format("%-8s | %-2s", getusername, getrole));
+
+		}
+		System.out.println();
+
+
+	}
+
+
+	static boolean deleteUser(ArrayList<User> userList, String username) {
+		// TODO Auto-generated method stub
+		boolean userFound = false;
+		for (User u : userList) {
+			String getusername = u.getusername();
+			if (username.equalsIgnoreCase(getusername)) {
+				u.display();
+				userFound = true;
+
+				String confirm = Helper.readString("\nConfirm Delete (y/n) >");
+				if (confirm.equalsIgnoreCase("y")) {
+					userList.remove(u);
+					System.out.println("\n*** User has been deleted ***");
 					break;
+				} else if (confirm.equalsIgnoreCase("n")) {
+					System.out.println("\n*** Deletion was cancel ***");
 				} else {
-					// invalid input
-					System.out.println("\n*** Invalid option ***\n");
+					System.out.println("\nInvalid input");
 				}
 			}
 		}
+		return userFound;
+	}
+	public static String retrieveUser(ArrayList<User> userList) {
+		// TODO Auto-generated method stub
+		String output = "";
 
-		
-		// ====== add User ===========================================
+		for (int i = 0; i < userList.size(); i++ ) {
 
-		private static void addUser(ArrayList<User> userList) {
-			// TODO Auto-generated method stub
-			String username = Helper.readString("Enter username: ");
-			String password = Helper.readString("Enter password: ");
-			userList.add(new User(username, password));
-			userList.get(userList.size() - 1).display();
-			System.out.println("***new user has been added***\n");
+			String getusername = userList.get(i).getusername();
+			String getpassword = userList.get(i).getpassword();
+			String getrole = userList.get(i).getrole();
+			output += String.format("%-8s | %-8s | %-2s\n", getusername,getpassword, getrole);
+
 		}
-			
-		// ====== view User ============================================
-		private static void viewUser(ArrayList<User> userList) {
-			// TODO Auto-generated method stub
-			Helper.line(20, "=");
-			System.out.println(String.format("%-8s | %-2s", "Username", "Name"));
-			Helper.line(20, "=");
-			for (User s : userList) {
-				System.out.println(String.format("%-8s | %-2s", s.getusername(), s.getpassword()));
+		return output;
+	}
 
-			}
-			System.out.println();
-			
-			
-		}
 
-		private static boolean deleteUser(ArrayList<User> userList) {
-			// TODO Auto-generated method stub
-			boolean userFound = false;
-			String username = Helper.readString("Enter username: ");
-			System.out.println();
 
-			for (User u : userList) {
-				if (username.equalsIgnoreCase(u.getusername())) {
-					u.display();
-					userFound = true;
-
-					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-					if (confirm.equalsIgnoreCase("y")) {
-						userList.remove(u);
-						System.out.println("\n*** User has been deleted ***");
-						break;
-					} else if (confirm.equalsIgnoreCase("n")) {
-						System.out.println("\n*** Deletion was cancel ***");
-					} else {
-						System.out.println("\nInvalid input");
-					}
-				}
-			}
-			return userFound;
-		}
-	
-	
 		// ====== manage student ===================================== JUN WEI 
 		public static void manageStudent(ArrayList<Student> studentList) {
 			int option = 0;
