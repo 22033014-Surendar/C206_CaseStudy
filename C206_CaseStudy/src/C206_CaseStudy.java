@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int MANAGE_COURSE = 2;
 	private static final int MANAGE_USER = 1;
 	private static final int MANAGE_STUDENT = 3;
 	private static final int OPTION_QUIT = 4;
@@ -61,7 +62,7 @@ public class C206_CaseStudy {
 			} else if (option == MANAGE_USER) {
 				manageUser(userList);
 				// add,view, delete user
-			} else if (option == 2) {
+			} else if (option == MANAGE_COURSE) {
 				// add,view, delete course 
 				manageCourse(courseList);
 			} else if (option == MANAGE_STUDENT) {
@@ -300,14 +301,15 @@ public class C206_CaseStudy {
 			System.out.println("2. View Course");
 			System.out.println("3. Delete Course");
 			option = Helper.readInt("\nEnter option or 0 for course menu > ");
-			if (option == 1) {
+			if (option == OPTION_ADD) {
 				Course cc = inputCourse();
 				addCourse(courseList, cc);
-			} else if (option == 2) {
+			} else if (option == OPTION_VIEW) {
 				viewCourse(courseList);
-			} else if (option == 3) {
-				deleteCourse(courseList);
-			} else if (option == 4) {
+			} else if (option == OPTION_DELETE) {
+				String id = Helper.readString("Enter course id: ");
+				deleteCourse(courseList, id);
+			} else if (option == OPTION_QUIT) {
 				break;
 			} else {
 				// invalid input
@@ -315,7 +317,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-     //SKYE
+     //SKYE 22019995
 	// ====== add course ===============================================
 	public static void addCourse(ArrayList<Course> courseList, Course cc) {
 		//String teacher = Helper.readString("Enter teacher's name: ");
@@ -325,7 +327,7 @@ public class C206_CaseStudy {
 		courseList.get(courseList.size() - 1).display();
 		System.out.println("***Course successfully added!***\n");
 	}
-     //SKYE
+     //SKYE 22019995
 	// ====== view course ===============================================
 	
 	public static String retrieveCourse(ArrayList<Course> courseList) {
@@ -333,7 +335,8 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < courseList.size(); i++ ) {
 			
-			String teacher = courseList.get(i).getTeacher();
+			String teacherName = courseList.get(i).getTeacher();
+			String teacher = teacherName;
 			String id = courseList.get(i).getId();
 			String name = courseList.get(i).getName();
 			output += String.format("%-8s | %-8s | %-2s",teacher, id,name);
@@ -352,7 +355,7 @@ public class C206_CaseStudy {
 		}
 		System.out.println();
 	}
-         //SKYE
+         //SKYE 22019995
 	// ====== delete course ===============================================
 
 	public static boolean deleteCourse(ArrayList<Course> courseList, String id) {
