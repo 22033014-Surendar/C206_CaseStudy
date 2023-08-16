@@ -112,7 +112,7 @@ public class C206_CaseStudyTest {
 		assertFalse("Test if non-esiting user name is NOT ok to delete?", ok);
 	}
 
-	// JUN WEI
+	// JUN WEI 22028513 
 	@Test
 	public void testAddStudent() {
 		// student list is not null, so that can add a new student - boundary.
@@ -131,7 +131,7 @@ public class C206_CaseStudyTest {
 		assertSame("Check that Student is added", s2, studentList.get(1));
 	}
 
-	// JUN WEI
+	// JUN WEI 22028513
 	@Test
 	public void testRetreieveStudent() {
 		// Test if Item list is not null but empty - boundary
@@ -157,7 +157,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewStudentlist", testOutput, students);
 	}
 
-	// JUN WEI
+	// JUN WEI 22028513
 	@Test
 	public void testDeleteStudent() {
 		// boundary

@@ -18,7 +18,7 @@ public class C206_CaseStudy {
 		userList.add(new User("Bob", "Republ!c02", "Admin"));
 		userList.add(new User("Alan", "Republ!c01", "Teacher"));
 
-		// initialise Student arraylist with Student objects JUN WEI
+		// initialise Student arraylist with Student objects JUN WEI 22028513
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		studentList.add(new Student("22028513", "jun wei"));
 		studentList.add(new Student("22021234", "skye"));
@@ -50,7 +50,7 @@ public class C206_CaseStudy {
 		//Enrolment arrayList
 		ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
 				
-		// display menu and ask for option
+		// display menu and ask for option 
 		int option = 99;
 		mainMenu();
 		// while loop for the option
@@ -66,7 +66,7 @@ public class C206_CaseStudy {
 				// add,view, delete course 
 				manageCourse(courseList);
 			} else if (option == MANAGE_STUDENT) {
-				// add,view, delete student JUN WEI
+				// add,view, delete student JUN WEI 22028513
 				manageStudent(studentList);
 			} else if (option == 4) {
 				// add,view, delete fee
@@ -87,7 +87,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	// ====== main menu ====================== 
+	// ====== main menu ====================== JUN WEI 22028513
 	public static void mainMenu() {
 		System.out.println();
 		Helper.line(33, "*");
@@ -205,7 +205,7 @@ public class C206_CaseStudy {
 
 
 
-		// ====== manage student ===================================== JUN WEI 
+		// ====== manage student ===================================== JUN WEI 22028513
 		public static void manageStudent(ArrayList<Student> studentList) {
 			int option = 0;
 			while (option != 4) {
@@ -230,7 +230,7 @@ public class C206_CaseStudy {
 			}
 		}
 
-		// ====== add student ======================================= JUN WEI
+		// ====== add student ======================================= JUN WEI 22028513
 		public static Student inputStudent() {
 			String id = Helper.readString("Enter student id: ");
 			String name = Helper.readString("Enter student name: ");
@@ -243,7 +243,7 @@ public class C206_CaseStudy {
 			System.out.println("***new student has been added***\n");
 		}
 		
-		// ====== view student ======================================== JUN WEI
+		// ====== view student ======================================== JUN WEI 22028513
 		public static String retrieveStudent(ArrayList<Student> studentList) {
 			String output = "";
 
@@ -265,7 +265,7 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 
-		// ====== delete student =========================================== JUN WEI
+		// ====== delete student =========================================== JUN WEI 22028513
 		public static boolean deleteStudent(ArrayList<Student> studentList, String id) {
 			boolean studentFound = false;
 
