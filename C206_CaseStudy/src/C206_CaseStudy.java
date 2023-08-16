@@ -592,6 +592,7 @@ public class C206_CaseStudy {
 			
 		}
 		
+		//22027998 Richard
 		// =================================== Fee ==================================
 		public static Fee inputFee() {
 			String studentID = Helper.readString("Enter student ID > ");
@@ -626,7 +627,7 @@ public class C206_CaseStudy {
 			}
 		}
 		
-		
+		//22027998 Richard
 		// ====== add fee ==================================================
 		public static void addFee(ArrayList<Fee> feeList, Fee ff) {
 			//String studentID = Helper.readString("Enter student id: ");
@@ -636,7 +637,8 @@ public class C206_CaseStudy {
 			feeList.get(feeList.size() - 1).display();
 			System.out.println("***new fee has been added***\n");
 				}
-				
+			
+		//22027998 Richard
 		// ====== view fee =================================================
 		public static String retrieveFee(ArrayList<Fee> feeList) {
 			String output = "";
@@ -657,6 +659,7 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 		
+		//22027998 Richard
 		// ====== delete fee ===============================================
 		public static boolean deleteFee(ArrayList<Fee> feeList, String id) {
 			boolean feeFound = false;

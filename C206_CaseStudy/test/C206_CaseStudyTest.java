@@ -171,6 +171,7 @@ public class C206_CaseStudyTest {
 		assertFalse("Test if non-existing student id is NOT ok to delete?", ok);
 	}
 
+	//22027998 Richard
 	@Test
 	public void testAddFee() {
 		// Item list is not null, so that can add a new item - boundary
@@ -189,6 +190,7 @@ public class C206_CaseStudyTest {
 		assertSame("Test that Fee is added", f2, feeList.get(1));
 	}
 
+	//22027998 Richard
 	@Test
 	public void testRetrieveFee() {
 		// Test if Item list is not null but empty - boundary
@@ -214,6 +216,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllFeelist", testOutput, fee);
 	}
 
+	//22027998 Richard
 	@Test
 	public void testDeleteFee() {
 		// boundary
