@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int MANAGE_ENROLMENT = 5;
 	private static final int MANAGE_COURSE = 2;
 	private static final int MANAGE_USER = 1;
 	private static final int MANAGE_STUDENT = 3;
@@ -51,7 +52,7 @@ public class C206_CaseStudy {
 		ArrayList<Enrolment> enrolmentList = new ArrayList<Enrolment>();
 		enrolmentList.add(new Enrolment("22005037", "C330"));
 		enrolmentList.add(new Enrolment("22005027", "C440"));
-		enrolmentList.add(new Enrolment("22005017", "C550"));
+		//enrolmentList.add(new Enrolment("22005017", "C550"));
 		
 		// display menu and ask for option 
 		int option = 99;
@@ -74,7 +75,7 @@ public class C206_CaseStudy {
 			} else if (option == 4) {
 				// add,view, delete fee
 				manageFee(feeList);
-			} else if (option == 5) {
+			} else if (option == MANAGE_ENROLMENT) {
 				manageEnrolment(enrolmentList);
 				// add,view, delete enrolment
 			} else if (option == 6) {
@@ -450,6 +451,16 @@ public class C206_CaseStudy {
 
 		}
 		// Amos 22005037
+		// === Enrolment ====
+		public static Enrolment inputEnrolment() {
+			String sid = Helper.readString("Enter student's id : ");
+			String cid = Helper.readString("Enter course id: ");
+			
+			Enrolment ee= new Enrolment(sid, cid);
+			return ee;
+		}
+			
+		// Amos 22005037
 		// ====== manage enrolment ======
 	    public static void manageEnrolment(ArrayList<Enrolment> enrolmentList) {
 	        int option = 0;
@@ -459,7 +470,8 @@ public class C206_CaseStudy {
 	            System.out.println("3. Delete Enrolment");
 	            option = Helper.readInt("\nEnter option or 0 for enrolment menu > ");
 	            if (option == 1) {
-	                addEnrolment(enrolmentList);
+	            	Enrolment ee = inputEnrolment();
+	                addEnrolment(enrolmentList,ee);
 	            } else if (option == 2) {
 	                viewEnrolment(enrolmentList);
 	            } else if (option == 3) {
@@ -475,24 +487,49 @@ public class C206_CaseStudy {
 	    }
 	    // Amos 22005037
 	    // ====== add enrolment ======
-	    public static void addEnrolment(ArrayList<Enrolment> enrolmentList) {
-	        String studentId = Helper.readString("Enter student ID: ");
-	        String courseId = Helper.readString("Enter course ID: ");
-	        enrolmentList.add(new Enrolment(studentId, courseId));
+	    public static void addEnrolment(ArrayList<Enrolment> enrolmentList, Enrolment ee) {
+	        //String studentId = Helper.readString("Enter student ID: ");
+	        //String courseId = Helper.readString("Enter course ID: ");
+	        enrolmentList.add(ee);
 	        System.out.println(" New enrolment has been added \n");
 	    }
 	    // Amos 22005037
 	    // ====== view enrolment ======
-	    public static String viewEnrolment(ArrayList<Enrolment> enrolmentList) {
-	        Helper.line(30, "=");
-	        System.out.println(String.format("%-12s | %-10s", "Student ID", "Course ID"));
-	        Helper.line(30, "=");
-	        for (Enrolment enrolment : enrolmentList) {
-	            System.out.println(String.format("%-12s | %-10s", enrolment.getStudentId(), enrolment.getCourseId()));
-	        }
-	        System.out.println();
-	        return null;
-	    }
+	    
+	    public static String retrieveEnrolment(ArrayList<Enrolment> enrolmentList) {
+			String output = "";
+
+			for (int i = 0; i < enrolmentList.size(); i++ ) {
+				
+
+				String cid = enrolmentList.get(i).getCourseId();
+				String sid = enrolmentList.get(i).getStudentId();
+				output += String.format("%-8s | %-8s",sid, cid);
+				
+			}
+			return output;
+		}
+
+		public static void viewEnrolment(ArrayList<Enrolment> enrolmentList) {
+			Helper.line(40, "=");
+			System.out.println(String.format("%-8s | %-8s", "Student ID", "Course ID"));
+			Helper.line(40, "=");
+			for (Enrolment e : enrolmentList) {
+				System.out.println(String.format("%-8s | %-8s", e.getStudentId(), e.getCourseId()));
+
+			}
+			System.out.println();
+		}
+//	    public static String viewEnrolment(ArrayList<Enrolment> enrolmentList) {
+//	        Helper.line(30, "=");
+//	        System.out.println(String.format("%-12s | %-10s", "Student ID", "Course ID"));
+//	        Helper.line(30, "=");
+//	        for (Enrolment enrolment : enrolmentList) {
+//	            System.out.println(String.format("%-12s | %-10s", enrolment.getStudentId(), enrolment.getCourseId()));
+//	        }
+//	        System.out.println();
+//	        return null;
+//	    }
 	    // Amos 22005037
 	    // ====== delete enrolment ======
 	    public static boolean deleteEnrolment(ArrayList<Enrolment> enrolmentList, String id, String id1) {

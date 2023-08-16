@@ -296,29 +296,42 @@ public class C206_CaseStudyTest {
 	//Test the method with different scenario
 	// Test Case 1: Adding to an empty list
 	// After adding 1 enrolment, the size of the list should be 1
-	C206_CaseStudy.addEnrolment(enrolmentList);
+	C206_CaseStudy.addEnrolment(enrolmentList, e1);
 	assertEquals("Test that enrolment list size is 1", 1, enrolmentList.size());
 	assertSame("Test that enrolment is added", e1, enrolmentList.get(0));
 
 	// Test Case 2: Adding to a non-empty list
 	// After adding another enrolment, the size of the list should be 2
-	C206_CaseStudy.addEnrolment(enrolmentList);
+	C206_CaseStudy.addEnrolment(enrolmentList, e2);
 	assertEquals("Test that enrolment list size is 2", 2, enrolmentList.size());
 	assertSame("Test that enrolment is added", e2, enrolmentList.get(1));
 	    }
 	//AMOS
 	@Test
-	public void testViewEnrolment() {
+	public void testRetrieveEnrolment() {
 	// Test if Enrolment list is not null but empty - boundary
 	assertNotNull("Test if there is valid Enrolment arraylist to retrieve enrolment from", enrolmentList);
+	
 
-	// Test Case: View enrolment in the list
-	C206_CaseStudy.addEnrolment(enrolmentList);
-	C206_CaseStudy.addEnrolment(enrolmentList);
-	String enrolmentOutput = C206_CaseStudy.viewEnrolment(enrolmentList);
-	assertTrue("Test that viewEnrolment method works as expected",
-		               enrolmentOutput.contains("22005047") && enrolmentOutput.contains("C110") &&
-		               enrolmentOutput.contains("22028513") && enrolmentOutput.contains("C123"));
+	// test if the list of enrolments retrieved from the C206_CaseStudy is empty -
+	// boundary
+	String enrolment = C206_CaseStudy.retrieveCourse(courseList);
+	String testOutput = "";
+	assertEquals("Test if enrolmentList is empty?", testOutput, enrolment);
+
+	// Given an empty list, after adding 2 courses, test if the size of the list is 2
+	C206_CaseStudy.addEnrolment(enrolmentList, e1);
+	C206_CaseStudy.addEnrolment(enrolmentList, e2);
+	assertEquals("Test that Course arraylist size is 2", 2, enrolmentList.size());
+	
+	// test if the expected output string same as the list of enrolments retrieved from
+	// the C206_CaseStudy
+	enrolment = C206_CaseStudy.retrieveEnrolment(enrolmentList);
+	testOutput = String.format("%-8s | %-8s", "22005047", "C110");
+	testOutput += String.format("%-8s | %-8s", "22028513", "C123");
+	assertEquals("Test that Viewenrolmentlist", testOutput, enrolment);
+	
+		               
 }
 
 	//AMOS
