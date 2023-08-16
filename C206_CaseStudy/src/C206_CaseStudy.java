@@ -469,16 +469,16 @@ public class C206_CaseStudy {
 	            System.out.println("2. View Enrolment");
 	            System.out.println("3. Delete Enrolment");
 	            option = Helper.readInt("\nEnter option or 0 for enrolment menu > ");
-	            if (option == 1) {
+	            if (option == OPTION_ADD) {
 	            	Enrolment ee = inputEnrolment();
 	                addEnrolment(enrolmentList,ee);
-	            } else if (option == 2) {
+	            } else if (option == OPTION_VIEW) {
 	                viewEnrolment(enrolmentList);
-	            } else if (option == 3) {
+	            } else if (option == OPTION_DELETE) {
 	                String id = Helper.readString("Enter student id: ");
 	                String id1 = Helper.readString("Enter course id: ");
 	                deleteEnrolment(enrolmentList, id, id1);
-	            } else if (option == 4) {
+	            } else if (option == OPTION_QUIT) {
 	                break;
 	            } else {
 	                System.out.println("\n Invalid option \n");
