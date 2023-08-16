@@ -284,38 +284,55 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-8s | %-8s | %-2s", "mr goh", "C456", "Maths");
 		assertEquals("Test that ViewCourselist", testOutput, courses);
 	}
+	//AMOS
+		@Test
+		public void testAddEnrolment() {
+			// Item list is not null, so that can add a new item - boundary
+			assertNotNull("Test if there is valid Enrolment arraylist to add to", enrolmentList);
+			
+	        //Test the method with different scenario
+	        // Test Case 1: Adding to an empty list
+	        // After adding 1 enrolment, the size of the list should be 1
+	        C206_CaseStudy.addEnrolment(enrolmentList);
+	        assertEquals("Test that enrolment list size is 1", 1, enrolmentList.size());
+	        assertSame("Test that enrolment is added", e1, enrolmentList.get(0));
 
-	@Test
-	public void testAddEnrolment() {
-		// Item list is not null, so that can add a new item - boundary
-		assertNotNull("Test if there is valid Enrolment arraylist to add to", enrolmentList);
+	        // Test Case 2: Adding to a non-empty list
+	        // After adding another enrolment, the size of the list should be 2
+	        C206_CaseStudy.addEnrolment(enrolmentList);
+	        assertEquals("Test that enrolment list size is 2", 2, enrolmentList.size());
+	        assertSame("Test that enrolment is added", e2, enrolmentList.get(1));
+	    }
+		//AMOS
+		@Test
+		public void testViewEnrolment() {
+		    // Test if Enrolment list is not null but empty - boundary
+		    assertNotNull("Test if there is valid Enrolment arraylist to retrieve enrolment from", enrolmentList);
 
-		// Test the method with different scenario
-		// Test Case 1: Adding to an empty list
-		// After adding 1 enrolment, the size of the list should be 1
-		C206_CaseStudy.addEnrolment(enrolmentList);
-		assertEquals("Test that enrolment list size is 1", 1, enrolmentList.size());
-		assertSame("Test that enrolment is added", e1, enrolmentList.get(0));
+		    // Test Case: View enrolment in the list
+		    C206_CaseStudy.addEnrolment(enrolmentList);
+		    C206_CaseStudy.addEnrolment(enrolmentList);
+		    String enrolmentOutput = C206_CaseStudy.viewEnrolment(enrolmentList);
+		    assertTrue("Test that viewEnrolment method works as expected",
+		               enrolmentOutput.contains("22005047") && enrolmentOutput.contains("C110") &&
+		               enrolmentOutput.contains("22028513") && enrolmentOutput.contains("C123"));
+		}
 
-		// Test Case 2: Adding to a non-empty list
-		// After adding another enrolment, the size of the list should be 2
-		C206_CaseStudy.addEnrolment(enrolmentList);
-		assertEquals("Test that enrolment list size is 2", 2, enrolmentList.size());
-		assertSame("Test that enrolment is added", e2, enrolmentList.get(1));
-	}
+		//AMOs
+		@Test
+		public void testDeleteEnrolment() {
+		    // Test Case 1: Deleting an existing enrolment
+		    enrolmentList.add(e1); // Assuming addEnrolment requires Enrolment objects
+		    boolean result = C206_CaseStudy.deleteEnrolment(enrolmentList, e1.getStudentId(), e1.getCourseId());
+		    assertTrue("Test if an existing enrolment can be deleted", result);
+		    assertEquals("Test that enrolment list size is 0 after deletion", 0, enrolmentList.size());
 
-	@Test
-	public void testviewEnrolment() {
+		    // Test Case 2: Deleting a non-existing enrolment
+		    result = C206_CaseStudy.deleteEnrolment(enrolmentList, "NonExistentStudentId", "NonExistentCourseId");
+		    assertFalse("Test if a non-existing enrolment cannot be deleted", result);
+		    assertEquals("Test that enrolment list size remains unchanged", 0, enrolmentList.size());
+		}
 
-	}
-
-	@Test
-	public void testdeleteEnrolment() {
-		// Test if Enrolment list is not null but empty
-		assertNotNull("Test if there is valid Enrolment arraylist to add an Enrolment", enrolmentList);
-
-		// Add test cases for deleteEnrolment method here.
-	}
 
 	@Test
 	public void testAddAttendance() {
