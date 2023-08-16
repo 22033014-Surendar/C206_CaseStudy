@@ -37,8 +37,8 @@ public class C206_CaseStudyTest {
 		c1 = new Course ("ms lim", "C123", "English");
 		c2 = new Course ("mr goh", "C456", "Maths");
 		s2 = new Student("22021234","skye");
-		//u1 = new User("Bob", "Republ!c02", "Admin");
-		//u2 = new User("Alan", "Republ!c01", "Teacher");
+		u1 = new User("Bob", "Republ!c02", "Admin");
+		u2 = new User("Alan", "Republ!c01", "Teacher");
 		e1 = new Enrolment("22005047", "C110");
 		e2 = new Enrolment("22028513", "C123");
 		f1 = new Fee("22028513", "Exam", 70.0);
