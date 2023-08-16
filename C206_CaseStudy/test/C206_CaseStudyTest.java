@@ -211,8 +211,8 @@ public class C206_CaseStudyTest {
 		// test if the expected output string same as the list of attendance retrieved
 		// from the C206_CaseStudy
 		fee = C206_CaseStudy.retrieveFee(feeList);
-		testOutput = String.format("%-8s | %-8s | %-2.2f\n", "22028513", "Exam", 70.0);
-		testOutput += String.format("%-8s | %-8s | %-2.2s\n", "22021234", "Tuition", 100.0);
+		testOutput = String.format("%-10s | %-10s | %-2.2f\n", "22028513", "Exam", 70.0);
+		testOutput += String.format("%-10s | %-10s | %-2.2f\n", "22021234", "Tuition", 100.0);
 		assertEquals("Test that ViewAllFeelist", testOutput, fee);
 	}
 
@@ -223,11 +223,11 @@ public class C206_CaseStudyTest {
 		assertNotNull("test if there is valid Fee arrayList to delete from", feeList);
 		C206_CaseStudy.addFee(feeList, f1);
 		// normal
-		Boolean ok = C206_CaseStudy.deleteFee(feeList, "22027890");
-		assertTrue("Test if student id is ok to delete?", ok);
+		Boolean ok = C206_CaseStudy.deleteFee(feeList, "22028513");
+		assertTrue("Test if fee is ok to delete?", ok);
 		// error condition
-		ok = C206_CaseStudy.deleteFee(feeList, "22020000");
-		assertFalse("Test if non-existing student id is NOT ok to delete?", ok);
+		ok = C206_CaseStudy.deleteFee(feeList, "00001111");
+		assertFalse("Test if non-existing fee is NOT ok to delete?", ok);
 	}
 
 	// SKYE 22019995

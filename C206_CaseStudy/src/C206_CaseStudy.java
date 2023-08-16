@@ -672,17 +672,9 @@ public class C206_CaseStudy {
 				if (id.equalsIgnoreCase(f.getStudentID())) {
 					f.display();
 					feeFound = true;
-
-					String confirm = Helper.readString("\nConfirm Delete (y/n) >");
-					if (confirm.equalsIgnoreCase("y")) {
-						feeList.remove(f);
-						System.out.println("\n*** Fee successfully deleted! ***");
-						break;
-					} else if (confirm.equalsIgnoreCase("n")) {
-						System.out.println("\n*** Deletion cancelled ***");
-					} else {
-						System.out.println("\nInvalid input");
-					} 
+					feeList.remove(f);
+					System.out.println("\n*** Fee successfully deleted! ***");
+					break;
 				}
 			}
 			return feeFound;
