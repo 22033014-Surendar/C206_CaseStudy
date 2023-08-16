@@ -9,6 +9,8 @@ import org.junit.Test;
 public class C206_CaseStudyTest {
 	private Student s1;
 	private Student s2;
+	private User u1;
+	private User u2;
 	private Course c1;
 	private Course c2;
 	private Enrolment e1;
@@ -19,6 +21,7 @@ public class C206_CaseStudyTest {
 	private Attendance a2;
 	
 	private ArrayList<Student> studentList;
+	private ArrayList<User> userList;
 	private ArrayList<Course> courseList;
 	private ArrayList<Enrolment> enrolmentList;
 	private ArrayList<Attendance> attendanceList;
@@ -29,9 +32,17 @@ public class C206_CaseStudyTest {
 	public void setUp() throws Exception {
 		// prepare test data
 		s1 = new Student("22028513","junwei");
+<<<<<<< HEAD
 		s2 = new Student("22021234","skye");
 		c1 = new Course ("ms lim", "C123", "English");
 		c2 = new Course ("mr goh", "C456", "Maths");
+=======
+		s2 = new Student("22021234","skye");
+		u1 = new User("Bob", "Republ!c02", "Admin");
+		u2 = new User("Alan", "Republ!c01", "Teacher");
+		c1 = new Course ("Mr bob", "A123", "info tech");
+		c2 = new Course ("Ms Yeo", "B123", "engineering");
+>>>>>>> branch 'master' of https://github.com/22033014-Surendar/C206_CaseStudy.git
 		e1 = new Enrolment("22005047", "C110");
 		e2 = new Enrolment("22028513", "C123");
 		f1 = new Fee("22028513", "Exam", 70.0);
@@ -40,13 +51,69 @@ public class C206_CaseStudyTest {
 		a2 = new Attendance("Tom", "22023333", "Absent");
 		
 		studentList = new ArrayList<Student>();
+		userList = new ArrayList<User>();
 		courseList = new ArrayList<Course>();
 		enrolmentList = new ArrayList<Enrolment>();
 		feeList = new ArrayList<Fee>();
 		attendanceList = new ArrayList<Attendance>();
 	}
 	
-	
+
+	//Surendar Mayan
+	@Test
+	public void testAddUser() {
+		// User list is not null, so that can add a new user - boundary.
+		assertNotNull("Check if there is valid User arraylist to add to",userList);
+		//Given an empty list, after adding 1 user, the size of the list is 1 - normal
+		//The user just added is as same as the first users of the list
+		C206_CaseStudy.addUser(userList, u1);
+		assertEquals("Check that User arraylist size is 1", 1, userList.size());
+		assertSame("Check that User is added", u1, userList.get(0));
+		//Add another user. test The size of the list is 2? -normal
+		//The student just added is as same as the second user of the list
+		C206_CaseStudy.addUser(userList, u2);
+		assertEquals("Check that User arraylist size is 2", 2, userList.size());
+		assertSame("Check that user is added", u2, userList.get(1));
+	}
+
+	@Test
+	public void testRetrieveUser() {
+		// Test if Item list is not null but empty - boundary
+		//ArrayList<User> testList = new ArrayList<User>();
+		//ArrayList testOutput = "[]";
+		assertNotNull("Test if there is valid User arraylist to retrieve user from", userList);
+
+		//test if the list of Attendance retrieved from the C206_CaseStudy is empty - boundary
+		String user = C206_CaseStudy.retrieveUser(userList);
+		String testOutput1 = "";
+		assertEquals("Test that the retrieved userList is empty?", testOutput1, user);
+
+		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+		C206_CaseStudy.addUser(userList, u1);
+		C206_CaseStudy.addUser(userList, u2);
+		assertEquals("Test that fee arraylist size is 2", 2, userList.size());
+
+		//test if the expected output string same as the list of attendance retrieved from the C206_CaseStudy	
+		user = C206_CaseStudy.retrieveUser(userList);
+
+		testOutput1 = String.format("%-8s | %-8s | %-2s\n", "Bob", "Republ!c02", "Admin");
+		testOutput1 += String.format("%-8s | %-8s | %-2s\n", "Alan", "Republ!c01", "Teacher");	
+		assertEquals("Test that ViewAllUserlist", testOutput1, user);
+	}
+
+	@Test 
+	public void testDeleteUser() {
+		// boundary
+		assertNotNull("test if there is valid User arrayList to delete from",userList);
+		C206_CaseStudy.addUser(userList, u1);
+		// normal
+		Boolean ok = C206_CaseStudy.deleteUser(userList, "Admin1");
+		assertFalse("Test if user name is ok to delete?",ok);
+		// error condition
+		ok = C206_CaseStudy.deleteUser(userList,"00005555");
+		assertFalse("Test if non-esiting user name is NOT ok to delete?",ok);
+	}
+
 
 	// JUN WEI
 	@Test
